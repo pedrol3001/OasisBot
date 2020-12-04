@@ -1,2 +1,2 @@
-# Dreams_Bot
+# Dreams-Bot
 The best discord bot
