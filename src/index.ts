@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import * as dotenv from 'dotenv';
 import Discord from 'discord.js';
 import SystemManager from './managers/system_manager';
