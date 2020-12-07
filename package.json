@@ -4,7 +4,8 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+				"test": "echo \"Error: no test specified\" && exit 1",
+				"dev": "ts-node-dev --inspect --ignore node_modules ./src/"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.2.0",
     "prettier": "^2.2.1",
+    "ts-node-dev": "^1.0.0",
     "typescript": "^4.1.2"
   },
   "dependencies": {
