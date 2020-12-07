@@ -4,8 +4,9 @@
   "main": "./dist/index.js",
   "scripts": {
     "start": "tsc && node dist/index.js",
-				"test": "echo \"Error: no test specified\" && exit 1",
-				"dev": "ts-node-dev --inspect --ignore node_modules ./src/"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --inspect --ignore node_modules ./src/",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,9 @@
   "dependencies": {
     "@types/node": "^14.14.10",
     "discord.js": "^12.5.1",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29"
   }
 }
