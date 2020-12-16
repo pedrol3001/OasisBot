@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity('servers')
-class Server {
+@Entity('guild')
+class Guild {
   @PrimaryColumn()
   guild_id: string;
 
@@ -9,4 +9,4 @@ class Server {
   prefix: string;
 }
 
-export default Server;
+export default Guild;

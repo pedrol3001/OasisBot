@@ -1,7 +1,5 @@
 import Discord from "discord.js"
 import SystemManager from "../managers/system_manager";
-import GuildManager from "../managers/guild_manager";
-import Server from "../models/Server";
 
 module.exports = {
   name: 'set prefix',
@@ -12,7 +10,7 @@ module.exports = {
   usage: 'set prefix [preifx]',
 
   async execute(msg: Discord.Message, args: Array<string>) {
-    const db = SystemManager.getInstance().serverDb;
+    const db = SystemManager.getInstance().guildDb;
 
     if (args.length > 0) {
 

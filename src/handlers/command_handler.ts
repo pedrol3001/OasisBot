@@ -31,12 +31,8 @@ class CommandHandler {
           || this.commands.find((cmd: any) => cmd.aliases && cmd.aliases.includes(aux_name.join(" ")));
 
       }
-      //commandName = args.shift().toLowerCase();
-      //command = this.commands.get(commandName)
-      //  || this.commands.find((cmd: any) => cmd.aliases && cmd.aliases.includes(commandName));
 
-      if (!command) return false; // retorna se comando não existir
-
+      if (!command) return false;
 
       if (command.dmOnly && msg.channel.type !== 'dm') {
         msg.reply('You can only use this command inside dms');
@@ -82,9 +78,6 @@ class CommandHandler {
       console.log(err);
       msg.channel.send(`Error, try again`);
     }
-
-
-
 
   }
 

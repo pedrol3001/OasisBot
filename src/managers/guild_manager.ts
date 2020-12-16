@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import CommandHandler from './command_handler';
+import CommandHandler from '../handlers/command_handler';
 import SystemManager from './system_manager';
 import path from 'path';
 class GuildManager {
@@ -16,7 +16,7 @@ class GuildManager {
 
   public async setPrefixFromDb() {
     try {
-      const quarry = await SystemManager.getInstance().serverDb.findOne(this.guildId);
+      const quarry = await SystemManager.getInstance().guildDb.findOne(this.guildId);
       this.prefix = quarry ? quarry.prefix : null;
     } catch (err) {
       console.error(err);

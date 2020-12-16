@@ -19,7 +19,7 @@ client.on('ready', async () => {
       .catch((err) => { console.error("Cant connect to db - " + err) });
 
     SystemManager.init(client);
-    await SystemManager.getInstance().setGuilds();
+    await SystemManager.getInstance().setGuildsFromCache();
 
     ready = true;
     console.log(`Logged in as ${client.user.tag}!`);
@@ -31,8 +31,29 @@ client.on('ready', async () => {
 
 
 });
+client.on('guildCreate', async (guild: Discord.Guild) => {
+  try {
 
-client.on('message', msg => {
+    SystemManager.getInstance().addGuild(guild.id);
+
+  } catch (err) {
+    console.error(err);
+  }
+
+});
+
+client.on('guildDelete', async (guild: Discord.Guild) => {
+  try {
+
+    console.log(SystemManager.getInstance().rmGuild(guild.id) ? `Guild ${guild.name} deleted` : `Error deleting the guild ${guild.name}`);
+
+  } catch (err) {
+    console.error(err);
+  }
+
+});
+
+client.on('message', (msg: Discord.Message) => {
   try {
 
     if (ready == true) {

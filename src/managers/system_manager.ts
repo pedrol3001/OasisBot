@@ -1,8 +1,8 @@
 import Discord, { DiscordAPIError, Snowflake } from 'discord.js';
 import GuildManager from './guild_manager';
-import CommandHandler from './command_handler';
+import CommandHandler from '../handlers/command_handler';
 import { getRepository, Repository } from 'typeorm';
-import Server from '../models/Server';
+import Guild from '../models/Guild';
 import path from 'path';
 
 class SystemManager {
@@ -11,18 +11,16 @@ class SystemManager {
   private guilds: Map<Discord.Snowflake, GuildManager>;
   private _dmCommandHandler: CommandHandler;
 
-  private _serverDb: Repository<Server>;
-  private golbal_prefix: string;
+  private _guildDb: Repository<Guild>;
 
   private constructor(client: Discord.Client) {
     try {
-      this._serverDb = getRepository(Server);
+      this._guildDb = getRepository(Guild);
       this.client = client;
       this.guilds = new Map<Discord.Snowflake, GuildManager>();
 
       this._dmCommandHandler = new CommandHandler();
       this._dmCommandHandler.addCommands(path.resolve("src", "global_commands") + "\\");
-      this.golbal_prefix = process.env.PREFIX;
 
 
     } catch (err) {
@@ -42,7 +40,7 @@ class SystemManager {
     }
     return SystemManager.instance;
   }
-  public async setGuilds() {
+  public async setGuildsFromCache() {
     for (let [id, guild] of this.client.guilds.cache) {
       this.guilds.set(guild.id, new GuildManager(guild.id));
       await this.guilds.get(guild.id).setPrefixFromDb();
@@ -50,12 +48,21 @@ class SystemManager {
     }
 
   }
+
+  public addGuild(guildId: Snowflake) {
+    this.guilds.set(guildId, new GuildManager(guildId));
+  }
+
   public getGuild(guildId: Snowflake): GuildManager {
     return this.guilds.get(guildId);
   }
 
-  public get serverDb(): Repository<Server> {
-    return this._serverDb;
+  public rmGuild(guildId: Snowflake): Boolean {
+    return this.guilds.delete(guildId);
+  }
+
+  public get guildDb(): Repository<Guild> {
+    return this._guildDb;
   }
 
   public get commandHandler(): CommandHandler {
