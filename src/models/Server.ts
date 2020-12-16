@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity('server')
+@Entity('servers')
 class Server {
   @PrimaryColumn()
   guild_id: string;

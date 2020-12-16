@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "./dist/index.js",
   "scripts": {
-    "start": "tsc && node dist/index.js",
+    "start": "ts-node ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --inspect --ignore node_modules ./src/",
+    "dev": "ts-node-dev --inspect --ignore node_modules ./src/index.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "repository": {

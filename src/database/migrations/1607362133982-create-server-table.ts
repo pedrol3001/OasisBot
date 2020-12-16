@@ -5,7 +5,7 @@ export default class createServerTable1607362133982
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'server',
+        name: 'servers',
         columns: [
           {
             name: 'guild_id',
@@ -22,6 +22,6 @@ export default class createServerTable1607362133982
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('server');
+    await queryRunner.dropTable('servers');
   }
 }
