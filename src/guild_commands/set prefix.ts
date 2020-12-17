@@ -24,7 +24,7 @@ module.exports = {
       SystemManager.getInstance().getGuild(
         msg.guild.id,
       ).prefix = args[0].toString();
-      return true;
     });
+    return true;
   },
 };

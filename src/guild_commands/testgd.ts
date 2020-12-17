@@ -12,5 +12,6 @@ module.exports = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async execute(msg: Discord.Message, args: Array<string>) {
     msg.channel.send('Testando Guild ;)');
+    return true;
   },
 };

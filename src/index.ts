@@ -65,8 +65,6 @@ client.on('message', (msg: Discord.Message): void => {
         // eslint-disable-next-line no-param-reassign
         msg.content = msg.content.slice(prefix.length);
 
-        console.log(msg.content);
-
         // eslint-disable-next-line no-unused-expressions
         SystemManager.getInstance().commandHandler.executeMsg(msg) ||
           SystemManager.getInstance()
