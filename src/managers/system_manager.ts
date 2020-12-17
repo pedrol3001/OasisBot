@@ -27,7 +27,7 @@ class SystemManager {
 
       this._dmCommandHandler = new CommandHandler();
       this._dmCommandHandler.addCommands(
-        `${path.resolve('src', 'global_commands')}\\`,
+        `${path.resolve('src', 'commands', 'global_commands')}\\`,
       );
     } catch (err) {
       console.error(err);

@@ -3,9 +3,10 @@
 /* eslint-disable global-require */
 import Discord from 'discord.js';
 import fs from 'fs';
+import Command from '../commands/command';
 
 class CommandHandler {
-  private _commands: Discord.Collection<string, Record<string, unknown>>;
+  private _commands: Discord.Collection<string, Command>;
 
   private cooldowns: Discord.Collection<
     string,
@@ -13,17 +14,16 @@ class CommandHandler {
   >;
 
   public constructor() {
-    this._commands = new Discord.Collection<string, Record<string, unknown>>();
+    this._commands = new Discord.Collection<string, Command>();
     this.cooldowns = new Discord.Collection<
       string,
       Discord.Collection<Discord.Snowflake, number>
     >();
   }
 
-  public executeMsg(msg: Discord.Message): boolean {
+  public async executeMsg(msg: Discord.Message): Promise<boolean> {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let command: any;
+      let command: Command;
 
       const args = msg.content.trim().split(/\s+/);
 
@@ -89,12 +89,24 @@ class CommandHandler {
       }
 
       // filtter args handler
-      if (command.args && !args.length) {
-        let reply = `You didn't provide any arguments, ${msg.author}!`;
+      if (command.args !== null && command.args === true && args.length === 0) {
+        const reply = `You didn't provide any arguments, ${msg.author}!\n
+          The proper usage would be: \`${process.env.PREFIX}${command.name}
+          ${command.usage ? command.usage : ''}\``;
 
-        if (command.usage) {
-          reply += `\nThe proper usage would be: \`${process.env.PREFIX}${command.usage}\``;
-        }
+        msg.channel.send(reply);
+        return false;
+      }
+
+      if (
+        command.args !== null &&
+        command.args === false &&
+        args.length !== 0
+      ) {
+        const reply = `This command does not require any arguments,
+          ${msg.author}!\n
+          The proper usage would be: \`${process.env.PREFIX}${command.name}
+          ${command.usage ? command.usage : ''}\``;
 
         msg.channel.send(reply);
         return false;
@@ -126,7 +138,7 @@ class CommandHandler {
       setTimeout(() => timestamps.delete(msg.author.id), cooldownAmount);
 
       // execute
-      return command.execute(msg, args);
+      return await command.execute(msg, args);
     } catch (err) {
       console.log(err);
       msg.channel.send(`Error, try again`);
@@ -159,8 +171,7 @@ class CommandHandler {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public get commands(): Array<any> {
+  public get commands(): Array<Command> {
     return Array.from(this._commands.values());
   }
 

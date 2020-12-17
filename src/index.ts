@@ -44,48 +44,51 @@ client.on('guildDelete', (guild: Discord.Guild) => {
   }
 });
 
-client.on('message', (msg: Discord.Message): void => {
-  try {
-    if (SystemManager.getInstance().ready) {
-      if (msg.author.bot) return;
+client.on(
+  'message',
+  async (msg: Discord.Message): Promise<void> => {
+    try {
+      if (SystemManager.getInstance().ready) {
+        if (msg.author.bot) return;
 
-      let prefix;
+        let prefix;
 
-      if (msg.guild) {
-        const guild = SystemManager.getInstance().getGuild(msg.guild.id);
+        if (msg.guild) {
+          const guild = SystemManager.getInstance().getGuild(msg.guild.id);
 
-        if (process.env.PREFIX && msg.content.startsWith(process.env.PREFIX))
-          prefix = process.env.PREFIX; // global prefix
+          if (process.env.PREFIX && msg.content.startsWith(process.env.PREFIX))
+            prefix = process.env.PREFIX; // global prefix
 
-        if (guild.prefix && msg.content.startsWith(guild.prefix))
-          prefix = guild.prefix; // guild prefix
+          if (guild.prefix && msg.content.startsWith(guild.prefix))
+            prefix = guild.prefix; // guild prefix
 
-        if (!prefix) return;
+          if (!prefix) return;
 
-        // eslint-disable-next-line no-param-reassign
-        msg.content = msg.content.slice(prefix.length);
-
-        // eslint-disable-next-line no-unused-expressions
-        SystemManager.getInstance().commandHandler.executeMsg(msg) ||
-          SystemManager.getInstance()
-            .getGuild(msg.guild.id)
-            .commandHandler.executeMsg(msg);
-      } else {
-        if (msg.content.startsWith(process.env.PREFIX)) {
           // eslint-disable-next-line no-param-reassign
-          msg.content = msg.content.slice(process.env.PREFIX.length);
+          msg.content = msg.content.slice(prefix.length);
+
+          // eslint-disable-next-line no-unused-expressions
+          (await SystemManager.getInstance().commandHandler.executeMsg(msg)) ||
+            (await SystemManager.getInstance()
+              .getGuild(msg.guild.id)
+              .commandHandler.executeMsg(msg));
+        } else {
+          if (msg.content.startsWith(process.env.PREFIX)) {
+            // eslint-disable-next-line no-param-reassign
+            msg.content = msg.content.slice(process.env.PREFIX.length);
+          }
+
+          console.log(msg.content);
+
+          await SystemManager.getInstance().commandHandler.executeMsg(msg);
         }
-
-        console.log(msg.content);
-
-        SystemManager.getInstance().commandHandler.executeMsg(msg);
+      } else {
+        msg.channel.send('Bot still loading');
       }
-    } else {
-      msg.channel.send('Bot still loading');
+    } catch (err) {
+      console.error(err);
     }
-  } catch (err) {
-    console.error(err);
-  }
-});
+  },
+);
 
 client.login(process.env.DISC_TOKEN);

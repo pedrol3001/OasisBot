@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
-import SystemManager from '../managers/system_manager';
+import SystemManager from '../../managers/system_manager';
+import Command from '../command';
 
-module.exports = {
+const cmd: Command = {
   name: 'set prefix',
   aliases: ['spfx'],
   args: true,
@@ -9,7 +11,7 @@ module.exports = {
   description: 'Set guild prefix',
   usage: '[preifx]',
 
-  async execute(msg: Discord.Message, args: Array<string>) {
+  async execute(msg: Discord.Message, args: Array<string>): Promise<boolean> {
     const db = SystemManager.getInstance().guildDb;
 
     const entity = db.create({
@@ -28,3 +30,5 @@ module.exports = {
     return true;
   },
 };
+
+export default cmd;

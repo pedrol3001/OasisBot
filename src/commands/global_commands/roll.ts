@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
+import Command from '../command';
 
-module.exports = {
+const cmd: Command = {
   name: 'roll',
   aliases: ['rll'],
   args: true,
@@ -8,7 +10,7 @@ module.exports = {
   description: 'Roll a dice',
   usage: '[D(number of faces)]',
 
-  async execute(msg: Discord.Message, args: Array<string>) {
+  async execute(msg: Discord.Message, args: Array<string>): Promise<boolean> {
     let return_msg = ' Rolled -> [';
     args.forEach((dice, i) => {
       if (
@@ -31,3 +33,5 @@ module.exports = {
     return true;
   },
 };
+
+export default cmd;

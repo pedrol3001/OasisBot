@@ -14,7 +14,7 @@ class GuildManager {
     this.guildId = guildId;
     this._commandHandler = new CommandHandler();
     this._commandHandler.addCommands(
-      `${path.resolve('src', 'guild_commands')}\\`,
+      `${path.resolve('src', 'commands', 'guild_commands')}\\`,
     );
   }
 
