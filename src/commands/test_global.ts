@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
-import Command from '../command';
+import PokeAPI from 'pokeapi-typescript';
+import Command, { CommandGroups } from '../models/command';
 
 const cmd: Command = {
   name: 'test global',
@@ -9,11 +10,19 @@ const cmd: Command = {
   cooldown: 1,
   description: 'Test Global Command',
   usage: '[args]',
+  group: [CommandGroups.global],
   roles: ['Teste'],
 
   async execute(msg: Discord.Message, args: Array<string>): Promise<boolean> {
-    msg.channel.send('Testado Global ;)');
-    return true;
+    try {
+      const teste = await PokeAPI.Pokemon.resolve(25);
+      console.log(teste);
+      msg.channel.send('Testado Global ;)');
+      return true;
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
   },
 };
 

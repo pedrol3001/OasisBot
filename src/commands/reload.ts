@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
-import SystemManager from '../../managers/system_manager';
-import Command from '../command';
+import SystemManager from '../managers/system_manager';
+import Command, { CommandGroups } from '../models/command';
 
 const cmd: Command = {
   name: 'reload',
@@ -9,6 +9,7 @@ const cmd: Command = {
   args: false,
   cooldown: 5,
   description: 'Reload bot',
+  group: [CommandGroups.global],
   permissions: ['ADMINISTRATOR'],
 
   async execute(msg: Discord.Message, args: Array<string>): Promise<boolean> {

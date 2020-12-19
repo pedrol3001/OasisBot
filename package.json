@@ -39,6 +39,7 @@
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "pg": "^8.5.1",
+    "pokeapi-typescript": "^2.1.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.29"
   }

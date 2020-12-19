@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
-import Command from '../command';
+import Command, { CommandGroups } from '../../../models/command';
 
 const cmd: Command = {
-  name: 'test guild',
-  aliases: ['tsgd'],
-  args: false,
+  name: 'play',
+  aliases: ['p'],
   cooldown: 1,
-  description: 'Test Guild Command',
-  usage: '[args]',
-  roles: ['Teste'],
+  description: 'Play music',
+  usage: '[name | youtube url | spotify url]',
+  group: [CommandGroups.guildOnly],
   async execute(msg: Discord.Message, args: Array<string>): Promise<boolean> {
-    msg.channel.send('Testando Guild ;)');
+    msg.channel.send('PLAYYYY');
+
     return true;
   },
 };

@@ -3,7 +3,7 @@
 /* eslint-disable global-require */
 import Discord from 'discord.js';
 import fs from 'fs';
-import Command from '../commands/command';
+import Command, { CommandGroups } from '../models/command';
 
 class CommandHandler {
   private _commands: Discord.Collection<string, Command>;
@@ -36,8 +36,7 @@ class CommandHandler {
         command =
           this._commands.get(aux_name.join(' ')) ||
           this._commands.find(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (cmd: any) =>
+            (cmd: Command) =>
               cmd.aliases && cmd.aliases.includes(aux_name.join(' ')),
           );
       }
@@ -83,13 +82,20 @@ class CommandHandler {
 
       // filter dmOnly handler
 
-      if (command.dmOnly && msg.channel.type !== 'dm') {
+      if (
+        command.group.some(gp => gp === CommandGroups.dmOnly) &&
+        msg.channel.type !== 'dm'
+      ) {
         msg.reply('You can only use this command inside dms');
         return false;
       }
 
       // filtter args handler
-      if (command.args !== null && command.args === true && args.length === 0) {
+      if (
+        command.args !== undefined &&
+        command.args === true &&
+        args.length === 0
+      ) {
         const reply = `You didn't provide any arguments, ${msg.author}!\n
           The proper usage would be: \`${process.env.PREFIX}${command.name}
           ${command.usage ? command.usage : ''}\``;
@@ -99,7 +105,7 @@ class CommandHandler {
       }
 
       if (
-        command.args !== null &&
+        command.args !== undefined &&
         command.args === false &&
         args.length !== 0
       ) {
@@ -146,7 +152,11 @@ class CommandHandler {
     }
   }
 
-  public addCommands(folderPath: string): void {
+  public addCommands(
+    folderPath: string,
+    filter?: CommandGroups,
+    count = 0,
+  ): void {
     try {
       const commandFiles = fs
         .readdirSync(folderPath)
@@ -156,18 +166,26 @@ class CommandHandler {
       for (const file of commandFiles) {
         delete require.cache[require.resolve(`${folderPath}${file}`)];
 
-        const command = require(`${folderPath}${file}`);
+        const command: Command = require(`${folderPath}${file}`).default;
 
         const is_command = this._commands.get(command.name);
 
         if (is_command) {
           console.log(`Command ${command.name} duplicated.`);
-        } else {
+          // eslint-disable-next-line no-prototype-builtins
+        } else if (
+          filter === undefined ||
+          (command.group.length > 0 && command.group.some(gp => gp === filter))
+        ) {
           this._commands.set(command.name, command);
         }
       }
     } catch (err) {
-      console.error(err);
+      if (count < 5) {
+        console.warn(`Erros loading commands, try:${count}`);
+        // eslint-disable-next-line no-param-reassign
+        this.addCommands(folderPath, filter, (count += 1));
+      } else console.error(err);
     }
   }
 
@@ -175,7 +193,11 @@ class CommandHandler {
     return Array.from(this._commands.values());
   }
 
-  public rmCommands(folderPath: string): void {
+  public rmCommands(
+    folderPath: string,
+    filter?: CommandGroups,
+    count = 0,
+  ): void {
     try {
       const commandFiles = fs
         .readdirSync(folderPath)
@@ -185,18 +207,22 @@ class CommandHandler {
       for (const file of commandFiles) {
         delete require.cache[require.resolve(`${folderPath}${file}`)];
 
-        const command = require(`${folderPath}${file}`);
+        const command: Command = require(`${folderPath}${file}`).default;
 
-        const is_command = this._commands.get(command.name);
-
-        if (!is_command) {
-          console.log(`Command ${command.name} does not exist.`);
-        } else {
+        // eslint-disable-next-line no-prototype-builtins
+        if (
+          filter === undefined ||
+          (command.group.length > 0 && command.group.some(gp => gp === filter))
+        ) {
           this._commands.delete(command.name);
         }
       }
     } catch (err) {
-      console.error(err);
+      if (count < 5) {
+        console.warn(`Erros removing commands, try:${count}`);
+        // eslint-disable-next-line no-param-reassign
+        this.rmCommands(folderPath, filter, (count += 1));
+      } else console.error(err);
     }
   }
 }

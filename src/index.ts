@@ -3,7 +3,9 @@ import Discord from 'discord.js';
 import { createConnection } from 'typeorm';
 import SystemManager from './managers/system_manager';
 
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 const client = new Discord.Client();
 
@@ -26,7 +28,7 @@ client.on('ready', () => {
 
 client.on('guildCreate', (guild: Discord.Guild) => {
   try {
-    SystemManager.getInstance().addGuild(guild.id);
+    SystemManager.getInstance().addGuild(guild);
   } catch (err) {
     console.error(err);
   }

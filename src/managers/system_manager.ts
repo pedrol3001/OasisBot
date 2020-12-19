@@ -1,9 +1,11 @@
-import Discord, { Snowflake } from 'discord.js';
+import Discord from 'discord.js';
 import path from 'path';
 import { getRepository, Repository } from 'typeorm';
 import GuildManager from './guild_manager';
 import CommandHandler from '../handlers/command_handler';
-import Guild from '../models/Guild';
+import Guild from '../database/models/Guild';
+import EmojiHandler from '../handlers/emoji_handler';
+import { CommandGroups } from '../models/command';
 
 class SystemManager {
   private _ready: boolean;
@@ -16,6 +18,8 @@ class SystemManager {
 
   private _dmCommandHandler: CommandHandler;
 
+  private _emojiHandler: EmojiHandler;
+
   private _guildDb: Repository<Guild>;
 
   private constructor(client: Discord.Client) {
@@ -26,8 +30,12 @@ class SystemManager {
       this.guilds = new Map<Discord.Snowflake, GuildManager>();
 
       this._dmCommandHandler = new CommandHandler();
+      this._emojiHandler = new EmojiHandler(
+        this._client.guilds.cache.get(process.env.CACHE_GUILD).emojis,
+      );
       this._dmCommandHandler.addCommands(
-        `${path.resolve('src', 'commands', 'global_commands')}\\`,
+        `${path.resolve('src', 'commands')}\\`,
+        CommandGroups.global,
       );
     } catch (err) {
       console.error(err);
@@ -63,31 +71,44 @@ class SystemManager {
     return SystemManager.instance;
   }
 
-  public async setGuildsFromCache(): Promise<unknown> {
-    const promises: Array<Promise<void>> = [];
-    this._client.guilds.cache.forEach(guild => {
-      const guild_aux = new GuildManager(guild.id);
+  public async setGuildsFromCache(): Promise<void[]> {
+    try {
+      const promises: Array<Promise<void>> = [];
+      this._client.guilds.cache.forEach(guild => {
+        const guild_aux = new GuildManager(guild);
 
-      promises.push(
-        guild_aux.setPrefixFromDb().then(() => {
-          this.guilds.set(guild.id, guild_aux);
-          console.log(`${guild.name} OK!`);
-        }),
-      );
-    });
+        promises.push(
+          guild_aux.setPrefixFromDb().then(() => {
+            this.guilds.set(guild.id, guild_aux);
+            console.log(`${guild.name} OK!`);
 
-    return Promise.all(promises);
+            // SOMENTE PARA TESTEESS
+            if (
+              process.env.NODE_ENV !== 'production' &&
+              guild_aux.guild.id === process.env.CACHE_GUILD
+            ) {
+              guild_aux.setAllModules();
+            }
+          }),
+        );
+      });
+
+      return Promise.all(promises);
+    } catch (err) {
+      console.error(err);
+      return Promise.reject();
+    }
   }
 
-  public addGuild(guildId: Snowflake): void {
-    this.guilds.set(guildId, new GuildManager(guildId));
+  public addGuild(guild: Discord.Guild): void {
+    this.guilds.set(guild.id, new GuildManager(guild));
   }
 
-  public getGuild(guildId: Snowflake): GuildManager {
+  public getGuild(guildId: Discord.Snowflake): GuildManager {
     return this.guilds.get(guildId);
   }
 
-  public rmGuild(guildId: Snowflake): boolean {
+  public rmGuild(guildId: Discord.Snowflake): boolean {
     return this.guilds.delete(guildId);
   }
 
@@ -97,6 +118,10 @@ class SystemManager {
 
   public get commandHandler(): CommandHandler {
     return this._dmCommandHandler;
+  }
+
+  public get emojiHandler(): EmojiHandler {
+    return this._emojiHandler;
   }
 
   public get client(): Discord.Client {
