@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
-import Command, { CommandGroups } from '../../../models/command';
+import Command, { CommandGroups } from '../../../interfaces/command';
 
 const cmd: Command = {
   name: 'pokemon',
@@ -8,7 +8,7 @@ const cmd: Command = {
   cooldown: 1,
   args: false,
   description: 'Spawn Pokemon',
-  group: [CommandGroups.dmOnly],
+  group: [CommandGroups.guildOnly],
   async execute(msg: Discord.Message, args: Array<string>): Promise<boolean> {
     msg.channel.send('POKEMOONNNNN');
 

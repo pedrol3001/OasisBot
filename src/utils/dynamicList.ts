@@ -25,14 +25,6 @@ class DynamicList extends DynamicMessage {
     this.pageSize = pageSize;
     this.list = list;
     this.counter = 0;
-    this.reRender();
-  }
-
-  @OnReaction(':arrow_right:')
-  protected increment(): void {
-    if (this.counter === Math.ceil(this.list.length / this.pageSize) - 1)
-      this.counter = 0;
-    else this.counter += 1;
   }
 
   @OnReaction(':arrow_left:')
@@ -40,6 +32,13 @@ class DynamicList extends DynamicMessage {
     if (this.counter === 0)
       this.counter = Math.ceil(this.list.length / this.pageSize) - 1;
     else this.counter -= 1;
+  }
+
+  @OnReaction(':arrow_right:')
+  protected increment(): void {
+    if (this.counter === Math.ceil(this.list.length / this.pageSize) - 1)
+      this.counter = 0;
+    else this.counter += 1;
   }
 
   protected render(): Discord.MessageEmbed {

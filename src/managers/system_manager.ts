@@ -4,8 +4,8 @@ import { getRepository, Repository } from 'typeorm';
 import GuildManager from './guild_manager';
 import CommandHandler from '../handlers/command_handler';
 import Guild from '../database/models/Guild';
-import EmojiHandler from '../handlers/emoji_handler';
-import { CommandGroups } from '../models/command';
+import { CommandGroups } from '../interfaces/command';
+import DreamError from '../handlers/error_handler';
 
 class SystemManager {
   private _ready: boolean;
@@ -18,8 +18,6 @@ class SystemManager {
 
   private _dmCommandHandler: CommandHandler;
 
-  private _emojiHandler: EmojiHandler;
-
   private _guildDb: Repository<Guild>;
 
   private constructor(client: Discord.Client) {
@@ -30,15 +28,13 @@ class SystemManager {
       this.guilds = new Map<Discord.Snowflake, GuildManager>();
 
       this._dmCommandHandler = new CommandHandler();
-      this._emojiHandler = new EmojiHandler(
-        this._client.guilds.cache.get(process.env.CACHE_GUILD).emojis,
-      );
+
       this._dmCommandHandler.addCommands(
         `${path.resolve('src', 'commands')}\\`,
         CommandGroups.global,
       );
     } catch (err) {
-      console.error(err);
+      new DreamError('Error Constructing System Manager', err).log();
     }
   }
 
@@ -48,13 +44,15 @@ class SystemManager {
       await SystemManager.instance.setGuildsFromCache();
       SystemManager.instance._ready = true;
     } else {
-      throw Error(`System Manager Already Inited`);
+      throw new DreamError('SystemManager already initted').log();
     }
   }
 
   public static async reset(): Promise<void> {
     if (!SystemManager.instance) {
-      throw Error(`System Manager Not Inited, run the init method first`);
+      throw new DreamError(
+        'System Manager Not Inited, run the init method first',
+      ).log();
     } else {
       SystemManager.instance = new SystemManager(
         SystemManager.instance._client,
@@ -95,7 +93,7 @@ class SystemManager {
 
       return Promise.all(promises);
     } catch (err) {
-      console.error(err);
+      new DreamError('Error stating the guilds from cache', err).log();
       return Promise.reject();
     }
   }
@@ -118,10 +116,6 @@ class SystemManager {
 
   public get commandHandler(): CommandHandler {
     return this._dmCommandHandler;
-  }
-
-  public get emojiHandler(): EmojiHandler {
-    return this._emojiHandler;
   }
 
   public get client(): Discord.Client {

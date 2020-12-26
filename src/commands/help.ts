@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord, { MessageEmbed } from 'discord.js';
-import Command, { CommandGroups } from '../models/command';
+import Command, { CommandGroups } from '../interfaces/command';
 import GuildManager from '../managers/guild_manager';
 import SystemManager from '../managers/system_manager';
 

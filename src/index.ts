@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import Discord from 'discord.js';
 import { createConnection } from 'typeorm';
 import SystemManager from './managers/system_manager';
+import DreamError from './handlers/error_handler';
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -19,10 +20,10 @@ client.on('ready', () => {
         });
       })
       .catch(err => {
-        console.error(`Cant connect to db - ${err}`);
+        new DreamError('Cant connect to db', err).log();
       });
   } catch (err) {
-    console.error(err);
+    new DreamError('Error starting the bot', err).log();
   }
 });
 
@@ -30,19 +31,21 @@ client.on('guildCreate', (guild: Discord.Guild) => {
   try {
     SystemManager.getInstance().addGuild(guild);
   } catch (err) {
-    console.error(err);
+    new DreamError('Error adding new guild', err, {
+      guildId: guild.id,
+      guild: guild.name,
+    }).log();
   }
 });
 
 client.on('guildDelete', (guild: Discord.Guild) => {
   try {
-    console.log(
-      SystemManager.getInstance().rmGuild(guild.id)
-        ? `Guild ${guild.name} deleted`
-        : `Error deleting the guild ${guild.name}`,
-    );
+    SystemManager.getInstance().rmGuild(guild.id);
   } catch (err) {
-    console.error(err);
+    new DreamError('Error deleting from the bot', err, {
+      guildId: guild.id,
+      guild: guild.name,
+    }).log();
   }
 });
 
@@ -50,22 +53,22 @@ client.on(
   'message',
   async (msg: Discord.Message): Promise<void> => {
     try {
-      if (SystemManager.getInstance().ready) {
-        if (msg.author.bot) return;
+      if (msg.author.bot) return;
 
-        let prefix;
+      let prefix;
 
-        if (msg.guild) {
-          const guild = SystemManager.getInstance().getGuild(msg.guild.id);
+      if (msg.guild) {
+        const guild = SystemManager.getInstance().getGuild(msg.guild.id);
 
-          if (process.env.PREFIX && msg.content.startsWith(process.env.PREFIX))
-            prefix = process.env.PREFIX; // global prefix
+        if (process.env.PREFIX && msg.content.startsWith(process.env.PREFIX))
+          prefix = process.env.PREFIX; // global prefix
 
-          if (guild.prefix && msg.content.startsWith(guild.prefix))
-            prefix = guild.prefix; // guild prefix
+        if (guild.prefix && msg.content.startsWith(guild.prefix))
+          prefix = guild.prefix; // guild prefix
 
-          if (!prefix) return;
+        if (!prefix) return;
 
+        if (SystemManager.getInstance().ready) {
           // eslint-disable-next-line no-param-reassign
           msg.content = msg.content.slice(prefix.length);
 
@@ -80,15 +83,15 @@ client.on(
             msg.content = msg.content.slice(process.env.PREFIX.length);
           }
 
-          console.log(msg.content);
-
           await SystemManager.getInstance().commandHandler.executeMsg(msg);
         }
       } else {
         msg.channel.send('Bot still loading');
       }
     } catch (err) {
-      console.error(err);
+      new DreamError('Error processing the message the bot', err, {
+        message: msg.content,
+      }).log();
     }
   },
 );

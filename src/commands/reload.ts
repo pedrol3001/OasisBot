@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
 import SystemManager from '../managers/system_manager';
-import Command, { CommandGroups } from '../models/command';
+import Command, { CommandGroups } from '../interfaces/command';
 
 const cmd: Command = {
   name: 'reload',

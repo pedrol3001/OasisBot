@@ -21,6 +21,7 @@
   "homepage": "https://github.com/pedrol3001/Dreams-Bot#readme",
   "description": "",
   "devDependencies": {
+    "@types/async-lock": "^1.1.2",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
     "eslint": "^7.15.0",
@@ -35,6 +36,7 @@
   },
   "dependencies": {
     "@types/node": "^14.14.10",
+    "async-lock": "^1.2.6",
     "discord-dynamic-messages": "^4.0.0",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",

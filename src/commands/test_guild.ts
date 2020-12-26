@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
-import Command, { CommandGroups } from '../models/command';
+import Command, { CommandGroups } from '../interfaces/command';
 import SystemManager from '../managers/system_manager';
 import Pokemon from '../modules/pokemon/pokemon';
 
@@ -14,13 +14,9 @@ const cmd: Command = {
   group: [CommandGroups.guildOnly],
   roles: ['Teste'],
   async execute(msg: Discord.Message, args: Array<string>): Promise<boolean> {
-    console.log('Global');
-    console.log(SystemManager.getInstance().commandHandler.commands);
-    console.log('Guild');
-    console.log(
-      SystemManager.getInstance().getGuild(msg.guild.id).commandHandler
-        .commands,
-    );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const teste: any = SystemManager.getInstance();
+
     msg.channel.send('Testando Guild ;)');
     return true;
   },

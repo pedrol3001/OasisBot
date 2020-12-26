@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
 import SystemManager from '../managers/system_manager';
-import Command, { CommandGroups } from '../models/command';
+import Command, { CommandGroups } from '../interfaces/command';
+import DreamError from '../handlers/error_handler';
 
 const cmd: Command = {
   name: 'set prefix',
@@ -20,14 +21,19 @@ const cmd: Command = {
       prefix: args[0],
     });
 
-    await db.save(entity).then(() => {
-      msg.channel.send(`Prefix set to ${args[0]}`);
-      // SystemManager.getInstance().getGuild(msg.guild.id).prefix = args[0];
+    await db
+      .save(entity)
+      .then(() => {
+        msg.channel.send(`Prefix set to ${args[0]}`);
+        // SystemManager.getInstance().getGuild(msg.guild.id).prefix = args[0];
 
-      SystemManager.getInstance().getGuild(
-        msg.guild.id,
-      ).prefix = args[0].toString();
-    });
+        SystemManager.getInstance().getGuild(
+          msg.guild.id,
+        ).prefix = args[0].toString();
+      })
+      .catch(err => {
+        new DreamError('Error saving prefix in database', err).log();
+      });
     return true;
   },
 };

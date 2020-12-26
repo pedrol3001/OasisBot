@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Discord from 'discord.js';
-import Command, { CommandGroups } from '../models/command';
+import Command, { CommandGroups } from '../interfaces/command';
 
 const cmd: Command = {
   name: 'roll',
@@ -8,7 +8,7 @@ const cmd: Command = {
   args: true,
   cooldown: 1,
   description: 'Roll a dice',
-  usage: '[D(number of faces)]',
+  usage: '[D[number of faces]]',
   group: [CommandGroups.global],
 
   async execute(msg: Discord.Message, args: Array<string>): Promise<boolean> {

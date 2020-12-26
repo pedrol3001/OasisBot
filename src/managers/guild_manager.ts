@@ -5,7 +5,8 @@ import Module from '../modules/module';
 import Music from '../modules/music/music';
 import Pokemon from '../modules/pokemon/pokemon';
 import SystemManager from './system_manager';
-import { CommandGroups } from '../models/command';
+import { CommandGroups } from '../interfaces/command';
+import DreamError from '../handlers/error_handler';
 
 class GuildManager {
   private _guild: Discord.Guild;
@@ -26,26 +27,32 @@ class GuildManager {
     );
   }
 
-  public async setPrefixFromDb(count = 0): Promise<void> {
+  public async setPrefixFromDb(count = 5): Promise<void> {
     try {
       const quarry = await SystemManager.getInstance().guildDb.findOne(
         this._guild.id,
       );
       this._prefix = quarry ? quarry.prefix : null;
     } catch (err) {
-      if (count < 5) {
+      if (count > 0) {
         console.warn(`Erros setting prefix, try:${count}`);
         // eslint-disable-next-line no-param-reassign
-        this.setPrefixFromDb((count += 1));
-      } else console.error(err);
+        this.setPrefixFromDb((count -= 1));
+      } else
+        new DreamError('Setting prefix from db', err, {
+          guildId: this.guild.id,
+          guild: this.guild.name,
+        }).log();
     }
   }
 
   public setAllModules(): void {
-    new Pokemon().setModule(this.commandHandler);
-    console.log(' - Pokemon');
-    new Music().setModule(this.commandHandler);
-    console.log(' - Music');
+    this._modules.set('pokemon', new Pokemon());
+    this._modules.set('music', new Music());
+
+    this._modules.forEach(module => {
+      module.setModule(this.commandHandler);
+    });
   }
 
   public set prefix(prefix: string) {

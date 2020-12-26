@@ -3,7 +3,9 @@
 /* eslint-disable global-require */
 import Discord from 'discord.js';
 import fs from 'fs';
-import Command, { CommandGroups } from '../models/command';
+// eslint-disable-next-line import/no-unresolved
+import Command, { CommandGroups } from '../interfaces/command';
+import DreamError from './error_handler';
 
 class CommandHandler {
   private _commands: Discord.Collection<string, Command>;
@@ -146,8 +148,10 @@ class CommandHandler {
       // execute
       return await command.execute(msg, args);
     } catch (err) {
-      console.log(err);
       msg.channel.send(`Error, try again`);
+      new DreamError('Error executing mesage', err, {
+        message: msg,
+      }).log();
       return false;
     }
   }
@@ -185,7 +189,11 @@ class CommandHandler {
         console.warn(`Erros loading commands, try:${count}`);
         // eslint-disable-next-line no-param-reassign
         this.addCommands(folderPath, filter, (count += 1));
-      } else console.error(err);
+      } else
+        new DreamError('Error adding commands from folder', err, {
+          folder: folderPath,
+          filter,
+        }).log();
     }
   }
 
@@ -222,7 +230,11 @@ class CommandHandler {
         console.warn(`Erros removing commands, try:${count}`);
         // eslint-disable-next-line no-param-reassign
         this.rmCommands(folderPath, filter, (count += 1));
-      } else console.error(err);
+      } else
+        new DreamError('Error deleting commands from folder', err, {
+          folder: folderPath,
+          filter,
+        }).log();
     }
   }
 }
