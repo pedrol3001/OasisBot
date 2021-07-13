@@ -1,48 +1,40 @@
 {
   "name": "dreams-bot",
   "version": "1.0.0",
-  "main": "./dist/index.js",
+  "main": "server.ts",
+  "author": "<pedrolcr@outlook.com>",
+  "license": "GNU",
   "scripts": {
-    "start": "ts-node ./src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --inspect --ignore node_modules ./src/index.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --poll src/server.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "format": "eslint src/**/*.ts --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pedrol3001/Dreams-Bot.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/pedrol3001/Dreams-Bot/issues"
-  },
-  "homepage": "https://github.com/pedrol3001/Dreams-Bot#readme",
-  "description": "",
   "devDependencies": {
-    "@types/async-lock": "^1.1.2",
-    "@typescript-eslint/eslint-plugin": "^4.9.0",
-    "@typescript-eslint/parser": "^4.9.0",
-    "eslint": "^7.15.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^7.0.0",
-    "eslint-import-resolver-typescript": "^2.3.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.2.0",
-    "prettier": "^2.2.1",
-    "ts-node-dev": "^1.0.0",
-    "typescript": "^4.1.2"
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "prettier": "^2.3.2",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@types/node": "^14.14.10",
-    "async-lock": "^1.2.6",
-    "discord-dynamic-messages": "^4.0.0",
-    "discord.js": "^12.5.1",
-    "dotenv": "^8.2.0",
-    "pg": "^8.5.1",
-    "pokeapi-typescript": "^2.1.0",
+    "@types/node": "^16.3.1",
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.29"
+    "typeorm": "^0.2.34"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
   }
 }

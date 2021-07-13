@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres
+    container_name: dreams_database
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=dreams
+    volumes:
+      - pgdata:/data/postgres
+
+  app:
+    build: .
+    container_name: dreams
+    volumes:
+      - .:/usr/app
+    links:
+      - database
+    depends_on:
+      - database
+
+volumes:
+  pgdata:
+    driver: local
