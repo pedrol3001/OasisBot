@@ -7,9 +7,10 @@
     "rootDir": "./",
     "baseUrl": "./src",
     "paths": {
-      "@Error": ["Error/*"],
-      "@Command": ["Error/*"]
+      "@error/*": ["error/*"],
+      "@commands/*": ["commands/*"]
     },
+    "outDir": "./dist",
 
     "esModuleInterop": true,
     "experimentalDecorators": true,

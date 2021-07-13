@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import Discord from 'discord.js';
-
+import DreamError from '@error/DreamError';
 
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -17,6 +17,7 @@ client.on(
   async (msg: Discord.Message): Promise<void> => {
     console.log(msg.content);
     await msg.channel.send("Dan god !");
+    throw new DreamError("Teste").log();
   },
 );
 

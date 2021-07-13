@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "main": "server.ts",
   "author": "<pedrolcr@outlook.com>",
-  "license": "GNU",
+  "license": "LGPL-3.0",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules --poll src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules --poll src/server.ts",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
   },
   "devDependencies": {
+    "@types/node": "^16.3.1",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "eslint": "^7.30.0",
@@ -21,12 +22,12 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-promise": "^5.1.0",
+    "tsconfig-paths": "^3.10.1",
     "prettier": "^2.3.2",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@types/node": "^16.3.1",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "reflect-metadata": "^0.1.13",
