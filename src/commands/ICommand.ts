@@ -8,7 +8,7 @@ export default interface ICommand {
   description: string;
   usage?: string;
   roles?: Array<string>;
-  group: Array< "guildOnly" | "global" | "dmOnly">;
+  group: Array<"guildOnly" | "global" | "dmOnly">;
   permissions?: Array<BitFieldResolvable<PermissionString>>;
 
   execute(msg: Discord.Message, args: Array<string>): Promise<boolean>;
