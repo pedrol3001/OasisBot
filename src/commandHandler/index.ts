@@ -1,12 +1,13 @@
 import Discord from 'discord.js';
 import fs from 'fs';
 
-import ICommand from "@commands/ICommand";
+import ICommand from "commandHandler/ICommand";
 import DreamError from "@error/DreamError";
+import { LoadGuildClientController } from '@guilds/useCases/LoadGuildClient/LoadGuildClientController';
+import { client } from 'client';
 
 class CommandHandler {
   private _commands: Discord.Collection<string, ICommand>;
-
   private cooldowns: Discord.Collection<
     string,
     Discord.Collection<Discord.Snowflake, number>
@@ -20,17 +21,47 @@ class CommandHandler {
     >();
   }
 
-  public async executeMsg(msg: Discord.Message): Promise<boolean> {
+  public async handle(msg: Discord.Message): Promise<void> {
+    await this.readPrefix(msg);
+    await this.executeMsg(msg);
+  }
+
+  public async readPrefix (msg: Discord.Message){
+
+    try {
+      if (msg.author.bot) return;
+
+      const loadGuildClientController = new LoadGuildClientController();
+      loadGuildClientController.handle(client);
+
+      let prefix;
+
+      //if (process.env.PREFIX && msg.content.startsWith(process.env.PREFIX))
+      //prefix = process.env.PREFIX; // global prefix
+
+      if (msg.guild.prefix && msg.content.startsWith(msg.guild.prefix))
+        prefix = msg.guild.prefix; // guild prefix
+
+      if (!prefix) return;
+      msg.content = msg.content.slice(prefix.length);
+    } catch (err) {
+      new DreamError('Error processing the message the bot', err, {
+        message: msg.content,
+      }).log();
+    }
+  }
+
+  public async executeMsg(msg: Discord.Message): Promise<void> {
     try {
       let command: ICommand;
 
-      const args = msg.content.trim().split(/\s+/);
+      msg.args = msg.content.trim().split(/\s+/);
 
       const aux_name = new Array<string>();
 
       // composed commands names handler
-      while (!command && args.length > 0) {
-        aux_name.push(args.shift().toLowerCase());
+      while (!command && msg.args.length > 0) {
+        aux_name.push(msg.args.shift().toLowerCase());
 
         command =
           this._commands.get(aux_name.join(' ')) ||
@@ -40,7 +71,7 @@ class CommandHandler {
           );
       }
       // comand exists
-      if (!command) return false;
+      if (!command) return;
 
       let flag_role = false;
 
@@ -60,7 +91,7 @@ class CommandHandler {
           msg.reply(
             `This command requires one of the roles ${command.roles.join(',')}`,
           );
-          return false;
+          return;
         }
       }
 
@@ -74,7 +105,7 @@ class CommandHandler {
                 ', ',
               )}`,
             );
-            return false;
+            return;
           }
         }
       }
@@ -86,27 +117,27 @@ class CommandHandler {
         msg.channel.type !== 'dm'
       ) {
         msg.reply('You can only use this command inside dms');
-        return false;
+        return;
       }
 
       // filtter args handler
       if (
         command.args !== undefined &&
         command.args === true &&
-        args.length === 0
+        msg.args.length === 0
       ) {
         const reply = `You didn't provide any arguments, ${msg.author}!\n
           The proper usage would be: \`${process.env.PREFIX}${command.name}
           ${command.usage ? command.usage : ''}\``;
 
         msg.channel.send(reply);
-        return false;
+        return;
       }
 
       if (
         command.args !== undefined &&
         command.args === false &&
-        args.length !== 0
+        msg.args.length !== 0
       ) {
         const reply = `This command does not require any arguments,
           ${msg.author}!\n
@@ -114,7 +145,7 @@ class CommandHandler {
           ${command.usage ? command.usage : ''}\``;
 
         msg.channel.send(reply);
-        return false;
+        return;
       }
       // cooldowns handler
       if (!this.cooldowns.has(command.name)) {
@@ -135,7 +166,7 @@ class CommandHandler {
               1,
             )} more second(s) before reusing the \`${command.name}\` command.`,
           );
-          return false;
+          return;
         }
       }
 
@@ -143,13 +174,12 @@ class CommandHandler {
       setTimeout(() => timestamps.delete(msg.author.id), cooldownAmount);
 
       // execute
-      return await command.execute(msg, args);
+      await command.execute(msg);
     } catch (err) {
       msg.channel.send(`Error, try again`);
       new DreamError('Error executing mesage', err, {
         message: msg,
       }).log();
-      return false;
     }
   }
 
@@ -163,7 +193,6 @@ class CommandHandler {
         .readdirSync(folderPath)
         .filter(file => file.endsWith('.ts'));
 
-      // eslint-disable-next-line no-restricted-syntax
       for (const file of commandFiles) {
         delete require.cache[require.resolve(`${folderPath}${file}`)];
 
@@ -173,7 +202,6 @@ class CommandHandler {
 
         if (is_command) {
           console.log(`Command ${command.name} duplicated.`);
-          // eslint-disable-next-line no-prototype-builtins
         } else if (
           filter === undefined ||
           (command.group.length > 0 && command.group.some(gp => gp === filter))
@@ -184,7 +212,7 @@ class CommandHandler {
     } catch (err) {
       if (count < 5) {
         console.warn(`Erros loading commands, try:${count}`);
-        // eslint-disable-next-line no-param-reassign
+
         this.addCommands(folderPath, filter, (count += 1));
       } else
         new DreamError('Error adding commands from folder', err, {
@@ -208,13 +236,13 @@ class CommandHandler {
         .readdirSync(folderPath)
         .filter(file => file.endsWith('.ts'));
 
-      // eslint-disable-next-line no-restricted-syntax
+
       for (const file of commandFiles) {
         delete require.cache[require.resolve(`${folderPath}${file}`)];
 
         const command: ICommand = require(`${folderPath}${file}`).default;
 
-        // eslint-disable-next-line no-prototype-builtins
+
         if (
           filter === undefined ||
           (command.group.length > 0 && command.group.some(gp => gp === filter))
@@ -225,7 +253,7 @@ class CommandHandler {
     } catch (err) {
       if (count < 5) {
         console.warn(`Erros removing commands, try:${count}`);
-        // eslint-disable-next-line no-param-reassign
+
         this.rmCommands(folderPath, filter, (count += 1));
       } else
         new DreamError('Error deleting commands from folder', err, {

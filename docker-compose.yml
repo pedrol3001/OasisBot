@@ -16,7 +16,10 @@ services:
 
   app:
     build: .
-    container_name: dreams
+    container_name: dreams_app
+    restart: always
+    ports:
+      - 9229:9229
     volumes:
       - .:/usr/app
     links:

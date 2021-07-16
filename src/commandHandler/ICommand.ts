@@ -11,5 +11,5 @@ export default interface ICommand {
   group: Array<"guildOnly" | "global" | "dmOnly">;
   permissions?: Array<BitFieldResolvable<PermissionString>>;
 
-  execute(msg: Discord.Message, args: Array<string>): Promise<boolean>;
+  execute(msg: Discord.Message): Promise<void>;
 }

@@ -6,10 +6,19 @@
     "baseUrl": "./src",
     "paths": {
       "@error/*": [
-        "Error/*"
+        "error/*"
       ],
       "@commands/*": [
         "commands/*"
+      ],
+      "@database/*": [
+        "database/*"
+      ],
+      "@guilds/*": [
+        "modules/guilds/*"
+      ],
+      "@shared/*":[
+        "shared/*"
       ]
     },
     "outDir": "./dist",
