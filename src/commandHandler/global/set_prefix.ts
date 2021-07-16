@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import DreamError from '@error/DreamError';
 import { SetGuildPrefixController } from '@guilds/useCases/SetGuildPrefix/SetGuildPrefixController';
 import ICommand from 'commandHandler/ICommand';
