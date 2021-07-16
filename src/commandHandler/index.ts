@@ -77,7 +77,7 @@ class CommandHandler {
 
       // roles handler
       if (msg.guild && command.roles) {
-        // eslint-disable-next-line no-restricted-syntax
+
         for (const requiredRole of command.roles) {
           if (
             msg.guild.roles.cache.some(role => role.name === requiredRole) &&
@@ -97,7 +97,7 @@ class CommandHandler {
 
       // permissions handler
       if (msg.guild && command.permissions) {
-        // eslint-disable-next-line no-restricted-syntax
+
         for (const requiredPermission of command.permissions) {
           if (!msg.member.hasPermission(requiredPermission)) {
             msg.reply(
