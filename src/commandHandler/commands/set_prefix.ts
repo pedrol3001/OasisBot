@@ -1,6 +1,6 @@
 import DreamError from '@error/DreamError';
 import { SetGuildPrefixController } from '@guilds/useCases/SetGuildPrefix/SetGuildPrefixController';
-import ICommand from 'commandHandler/ICommand';
+import ICommand from 'commandHandler/interfaces/ICommand';
 import Discord from 'discord.js';
 
 const cmd: ICommand = {
@@ -10,7 +10,7 @@ const cmd: ICommand = {
   cooldown: 5,
   description: 'Set guild prefix',
   usage: '[preifx]',
-  group: ['guildOnly'],
+  group: 'guildOnly',
 
   async execute(msg: Discord.Message): Promise<void> {
 

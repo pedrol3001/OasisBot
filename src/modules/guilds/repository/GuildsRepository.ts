@@ -19,7 +19,7 @@ class GuildsRepository implements IGuildsRepository {
     await this.repository.save(guild);
   }
 
-  async findById(id: Discord.Snowflake): Promise<Guild> {
+  async findById(id: string): Promise<Guild> {
     const guild = await this.repository.findOneOrFail(id);
     return guild;
   }

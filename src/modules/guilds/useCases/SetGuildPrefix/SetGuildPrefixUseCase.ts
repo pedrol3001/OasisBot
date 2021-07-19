@@ -6,7 +6,7 @@ import { ICreateGuildDTO } from "@guilds/dtos/ICreateGuildDTO";
 
 
 interface IPrefixChange {
-  id: Discord.Snowflake;
+  id: string;
   prefix: string;
 }
 

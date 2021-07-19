@@ -1,6 +1,6 @@
 import path from 'path';
 import Discord from 'discord.js';
-import { LoadGuildClientController } from "@guilds/useCases/LoadGuildClient/LoadGuildClientController";
+import { LoadGuildController } from "@guilds/useCases/LoadGuild/LoadGuildController";
 import CommandHandler from "commandHandler";
 
 
@@ -8,9 +8,10 @@ const client = new Discord.Client();
 client.commandHandler = new CommandHandler();
 
 client.once('ready', () => {
-  const loadGuildClientController = new LoadGuildClientController();
-  loadGuildClientController.handle(client);
-  client.commandHandler.addCommands(`${path.resolve('src', 'commandHandler', 'global')}/`);
+  const loadGuildController = new LoadGuildController();
+  loadGuildController.handle(client);
+
+  client.commandHandler.add(`${path.resolve('src', 'commandHandler', 'commands')}/`);
   console.log('Ready!');
 });
 

@@ -5,15 +5,15 @@ import { IGuildsRepository } from "../../repository/IGuildsRepository";
 
 
 @injectable()
-class LoadGuildClientUseCase {
+class LoadGuildUseCase {
   constructor(
     @inject("GuildsRepository")
     private guildRepository: IGuildsRepository
   ) {}
 
-  public async execute(client : Discord.Client): Promise<void> {
+  public async execute(guilds : Discord.Collection<string,Discord.Guild>): Promise<void> {
 
-    await Promise.all(client.guilds.cache.map(async (guild) => {
+    await Promise.all(guilds.map(async (guild) => {
       const defaultGuild: Guild = new Guild();
       defaultGuild.id = guild.id;
       try{
@@ -26,4 +26,4 @@ class LoadGuildClientUseCase {
   }
 }
 
-export { LoadGuildClientUseCase };
+export { LoadGuildUseCase };

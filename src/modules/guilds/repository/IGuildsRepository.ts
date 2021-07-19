@@ -4,7 +4,7 @@ import { Guild } from "../entities/Guild";
 
 interface IGuildsRepository {
   create(data: ICreateGuildDTO): Promise<void>;
-  findById(id: Discord.Snowflake): Promise<Guild>;
+  findById(id: string): Promise<Guild>;
 }
 
 export { IGuildsRepository };

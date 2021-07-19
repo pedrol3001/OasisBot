@@ -1,7 +1,5 @@
-import Discord from "discord.js"; "discord.js"
-
 interface ICreateGuildDTO {
-  id: Discord.Snowflake;
+  id: string;
   prefix?: string;
 }
 

@@ -10,7 +10,7 @@ class Guild {
   @Column()
   prefix?: string;
 
-  constructor(id?: Discord.Snowflake) {
+  constructor(id?: string) {
     this.id = id || null;
     if (!this.prefix) {
       this.prefix = process.env.PREFIX || '!';
