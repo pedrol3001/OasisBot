@@ -22,11 +22,11 @@ class CommandHandler {
   public constructor() {
     this._commands = new Discord.Collection<string, ICommand>();
     this._handlers = [
-      container.resolve(ArgsHandler),
-      container.resolve(GroupsHandler),
-      container.resolve(PermissionsHandler),
-      container.resolve(RolesHandler),
-      container.resolve(CooldownsHandler)
+      new ArgsHandler(),
+      new GroupsHandler(),
+      new PermissionsHandler(),
+      new RolesHandler(),
+      new CooldownsHandler()
     ];
 
   }
