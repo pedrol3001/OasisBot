@@ -1,9 +1,9 @@
-import { CommandError } from "commandHandler/error/CommandError";
-import ICommand from "commandHandler/interfaces/ICommand";
-import IHandler from "commandHandler/interfaces/IHandler";
 import Discord from "discord.js"
+import ICommand from "commands/ICommand";
+import { CommandError } from "commands/error/CommandError";
+import { AbstractHandler } from "../AbstractHandler";
 
-class CooldownsHandler implements IHandler{
+class CooldownsHandler extends AbstractHandler{
 
   private cooldowns: Discord.Collection<
     string,
@@ -11,6 +11,7 @@ class CooldownsHandler implements IHandler{
   >;
 
   public constructor() {
+    super();
     this.cooldowns = new Discord.Collection<
       string,
       Discord.Collection<string, number>
@@ -18,16 +19,16 @@ class CooldownsHandler implements IHandler{
   }
 
 
-  handle(msg: Discord.Message, command: ICommand){
+  handle(msg: Discord.Message) : void{
 
     // cooldowns handler
-    if (!this.cooldowns.has(command.name)) {
-      this.cooldowns.set(command.name, new Discord.Collection());
+    if (!this.cooldowns.has(msg.command.name)) {
+      this.cooldowns.set(msg.command.name, new Discord.Collection());
     }
 
     const now = Date.now();
-    const timestamps = this.cooldowns.get(command.name);
-    const cooldownAmount = (command.cooldown || 1) * 1000;
+    const timestamps = this.cooldowns.get(msg.command.name);
+    const cooldownAmount = (msg.command.cooldown || 1) * 1000;
 
     if (timestamps.has(msg.author.id)) {
       const expirationTime = timestamps.get(msg.author.id) + cooldownAmount;
@@ -37,7 +38,7 @@ class CooldownsHandler implements IHandler{
         const reply =
           `Please wait ${timeLeft.toFixed(
             1,
-          )} more second(s) before reusing the \`${command.name}\` command.`;
+          )} more second(s) before reusing the \`${msg.command.name}\` command.`;
 
         throw new CommandError(reply ,msg.channel );
       }
@@ -45,6 +46,8 @@ class CooldownsHandler implements IHandler{
 
     timestamps.set(msg.author.id, now);
     setTimeout(() => timestamps.delete(msg.author.id), cooldownAmount);
+
+    super.handle(msg);
 
   }
 

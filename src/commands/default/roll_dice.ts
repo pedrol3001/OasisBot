@@ -1,4 +1,4 @@
-import ICommand from "commandHandler/interfaces/ICommand";
+import ICommand from "commands/ICommand";
 import Discord, { BitFieldResolvable, PermissionString } from 'discord.js';
 
 const command: ICommand = {

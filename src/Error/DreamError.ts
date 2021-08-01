@@ -10,19 +10,13 @@ class DreamError extends Error {
 
     Object.setPrototypeOf(this, DreamError.prototype);
 
-    if (cause !== undefined) {
-      const subMessage =
-        cause instanceof Error
-          ? cause.message
-          : `non-error object thrown: ${JSON.stringify(cause)}`;
-      this.message = `${this.message}: ${subMessage}`;
+    if (cause) {
+      const causeMessage =
+        cause instanceof Error ? cause.message : `Invalid error object: ${JSON.stringify(cause)}`;
 
-      if (!this.firstStack) {
-        this.firstStack = cause.stack;
-      }
+      this.message = `${this.message}: ${causeMessage}`;
+
     }
-
-    this.stack = this.firstStack;
 
     this.metadata = {
       ...(cause instanceof DreamError ? cause.metadata : {}),

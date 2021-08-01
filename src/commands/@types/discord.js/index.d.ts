@@ -1,3 +1,4 @@
+import ICommand from "@command/ICommand";
 import CommandHandler from "@commands/";
 
 declare module "discord.js" {
@@ -7,5 +8,6 @@ declare module "discord.js" {
 
   export interface Message{
       args: Array<string>
+      command: ICommand
   }
 }

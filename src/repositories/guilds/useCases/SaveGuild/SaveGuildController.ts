@@ -1,4 +1,4 @@
-import { ICreateGuildDTO } from "@guilds/dtos/ICreateGuildDTO";
+import { ICreateGuildDTO } from "@repositories/guilds/dtos/ICreateGuildDTO";
 import { container } from "tsyringe";
 import { SaveGuildUseCase } from "./SaveGuildUseCase";
 

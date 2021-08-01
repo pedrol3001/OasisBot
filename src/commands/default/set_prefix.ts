@@ -1,6 +1,6 @@
 import DreamError from '@error/DreamError';
-import { SetGuildPrefixController } from '@guilds/useCases/SetGuildPrefix/SetGuildPrefixController';
-import ICommand from 'commandHandler/interfaces/ICommand';
+import { SetGuildPrefixController } from '@repositories/guilds/useCases/SetGuildPrefix/SetGuildPrefixController';
+import ICommand from 'commands/ICommand';
 import Discord from 'discord.js';
 
 const cmd: ICommand = {

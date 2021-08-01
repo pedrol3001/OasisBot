@@ -6,7 +6,7 @@
   "password": "password",
   "database": "dreams",
   "entities": [
-    "./src/modules/**/entities/*.ts"
+    "./src/repositories/**/entities/*.ts"
   ],
   "migrations": [
     "./src/database/migrations/*.ts"

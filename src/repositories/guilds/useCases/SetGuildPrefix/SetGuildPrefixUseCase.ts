@@ -1,8 +1,8 @@
-import { IGuildsRepository } from "@guilds/repository/IGuildsRepository";
+import { IGuildsRepository } from "@repositories/guilds/repository/IGuildsRepository";
 import { inject, injectable } from "tsyringe";
 import Discord from 'discord.js';
-import { Guild } from "@guilds/entities/Guild";
-import { ICreateGuildDTO } from "@guilds/dtos/ICreateGuildDTO";
+import { Guild } from "@repositories/guilds/entities/Guild";
+import { ICreateGuildDTO } from "@repositories/guilds/dtos/ICreateGuildDTO";
 
 
 interface IPrefixChange {

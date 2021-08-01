@@ -1,7 +1,7 @@
-import path from 'path';
 import Discord from 'discord.js';
+import DreamError from '@error/DreamError';
+import CommandHandler from 'commands/index';
 import { LoadGuildController } from "@guilds/useCases/LoadGuild/LoadGuildController";
-import CommandHandler from "commandHandler";
 
 
 const client = new Discord.Client();
@@ -11,14 +11,17 @@ client.once('ready', () => {
   const loadGuildController = new LoadGuildController();
   loadGuildController.handle(client);
 
-  client.commandHandler.add(`${path.resolve('src', 'commandHandler', 'commands')}/`);
   console.log('Ready!');
 });
 
 client.on(
   'message',
   async (msg: Discord.Message): Promise<void> => {
-    await client.commandHandler.handle(msg);
+    try{
+      await client.commandHandler.handle(msg);
+    } catch(err){
+      err.log()
+    }
   },
 );
 

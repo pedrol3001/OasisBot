@@ -8,22 +8,23 @@
       "@error/*": [
         "error/*"
       ],
-      "@commands/*": [
+      "@command/*": [
         "commands/*"
       ],
       "@database/*": [
         "database/*"
       ],
-      "@guilds/*": [
-        "modules/guilds/*"
+      "@repositories/*": [
+        "repositories/*"
       ],
-      "@shared/*":[
-        "shared/*"
+      "@guilds/*": [
+        "repositories/guilds/*"
       ]
     },
     "outDir": "./dist",
     "esModuleInterop": true,
     "experimentalDecorators": true,
+    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
