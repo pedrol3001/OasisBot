@@ -5,13 +5,13 @@ const command: ICommand = {
   name: 'roll dice',
   aliases: ['roll'],
   args: true,
-  usage: 'Digite roll e o numero de lados do dado',
-  description: 'Roll a dice of n numbers',
+  usage: '[n]',
+  description: 'Roll a dice of n faces',
   group: "global",
 
   async execute(msg: Discord.Message): Promise<void> {
     msg.args.forEach((arg) => {
-      msg.reply(`Toma ${Math.floor(Math.random() * Number(arg))}`);
+      msg.reply(`Rolled ${Math.floor(Math.random() * Number(arg))}`);
     });
   }
 };

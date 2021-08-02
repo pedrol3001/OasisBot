@@ -1,16 +1,16 @@
 import Discord from 'discord.js';
-import DreamError from '@error/DreamError';
 import CommandHandler from 'commands/index';
 import { LoadGuildController } from "@guilds/useCases/LoadGuild/LoadGuildController";
 
+const client = new Discord.Client({ shardCount: 1 });
 
-const client = new Discord.Client();
 client.commandHandler = new CommandHandler();
 
 client.once('ready', () => {
   const loadGuildController = new LoadGuildController();
   loadGuildController.handle(client);
 
+  client.user.setActivity("Online!");
   console.log('Ready!');
 });
 
@@ -24,5 +24,9 @@ client.on(
     }
   },
 );
+
+client.on("error", (e) => console.error(e));
+client.on("warn", (e) => console.warn(e));
+client.on("debug", (e) => console.info(e));
 
 export {client};

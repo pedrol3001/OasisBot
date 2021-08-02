@@ -2,14 +2,14 @@
   "name": "dreams-bot",
   "version": "1.0.0",
   "main": "server.ts",
+  "private": false,
   "author": "<pedrolcr@outlook.com>",
   "license": "LGPL-3.0",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --exit-child --respawn src/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest",
-    "lint": "eslint src/**/*.ts",
-    "format": "eslint src/**/*.ts --fix"
+    "lint": "eslint src/**/*.ts"
   },
   "devDependencies": {
     "@types/node": "^16.3.1",
