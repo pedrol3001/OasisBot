@@ -17,14 +17,14 @@
       "@repositories/*": [
         "repositories/*"
       ],
-      "@guilds/*": [
-        "repositories/guilds/*"
-      ],
-      "@plugins/*": [
-        "repositories/guilds/*"
-      ],
       "@plugins_template/*": [
         "plugins/template/*"
+      ],
+      "@guilds_repo/*": [
+        "repositories/guild/*"
+      ],
+      "@plugins_repo/*": [
+        "repositories/plugin/*"
       ],
     },
     "outDir": "./dist",

@@ -1,8 +1,8 @@
 import { container } from "tsyringe";
-import {GuildsRepository} from "@guilds/repository/GuildsRepository"
-import { IGuildsRepository } from "@guilds/repository/IGuildsRepository";
-import { IPluginsRepository } from "./plugins/repository/IPluginsRepository";
-import { PluginsRepository } from "./plugins/repository/PluginsRepository";
+import {GuildsRepository} from "@repositories/guild/repository/GuildsRepository"
+import { IGuildsRepository } from "@repositories/guild/repository/IGuildsRepository";
+import { IPluginsRepository } from "./plugin/repository/IPluginsRepository";
+import { PluginsRepository } from "./plugin/repository/PluginsRepository";
 
 container.registerSingleton<IGuildsRepository>(
   "GuildsRepository",

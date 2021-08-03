@@ -1,6 +1,6 @@
 import Discord from 'discord.js';
-import CommandHandler from 'commands/index';
-import { LoadGuildsController } from "@repositories/guilds/useCases/LoadGuilds/LoadGuildsController";
+import CommandHandler from 'command_handler/index';
+import { LoadGuildsController } from "@repositories/guild/useCases/LoadGuilds/LoadGuildsController";
 import {PluginsController} from './plugins'
 
 const client = new Discord.Client({shardCount: 1});
