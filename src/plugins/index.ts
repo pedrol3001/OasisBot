@@ -13,7 +13,7 @@ export const PluginsController = {
 
   handle (client: Discord.Client) {
 
-      const werewolfManager = container.resolve(WerewolfManager);
+      const werewolfManager = container.resolve<WerewolfManager>("WerewolfManager");
       werewolfManager.setup().then(
         () => werewolfManager.plug(client.commandHandler)
       );
