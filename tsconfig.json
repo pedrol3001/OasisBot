@@ -19,7 +19,13 @@
       ],
       "@guilds/*": [
         "repositories/guilds/*"
-      ]
+      ],
+      "@plugins/*": [
+        "repositories/guilds/*"
+      ],
+      "@plugins_template/*": [
+        "plugins/template/*"
+      ],
     },
     "outDir": "./dist",
     "esModuleInterop": true,

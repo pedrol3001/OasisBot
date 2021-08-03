@@ -1,4 +1,4 @@
-import ICommand from "commands/ICommand"
+import ICommand from "interfaces/ICommand"
 import Discord from "discord.js"
 
 class CommandError {

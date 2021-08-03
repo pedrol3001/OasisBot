@@ -1,11 +1,9 @@
 import { IGuildsRepository } from "@repositories/guilds/repository/IGuildsRepository";
 import { inject, injectable } from "tsyringe";
-import Discord from 'discord.js';
-import { Guild } from "@repositories/guilds/entities/Guild";
 import { ICreateGuildDTO } from "@repositories/guilds/dtos/ICreateGuildDTO";
 
 @injectable()
-class SaveGuildUseCase{
+class CreateGuildUseCase{
 
   constructor(
     @inject("GuildsRepository")
@@ -18,4 +16,4 @@ class SaveGuildUseCase{
 
 }
 
-export {SaveGuildUseCase};
+export {CreateGuildUseCase};

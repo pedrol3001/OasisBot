@@ -14,17 +14,16 @@ class GuildsRepository implements IGuildsRepository {
   async create({ id, prefix }: ICreateGuildDTO): Promise<void> {
     const guild = this.repository.create({
       id,
-      prefix
+      prefix,
+      plugins : Promise.resolve([] as Guild[])
     });
     await this.repository.save(guild);
   }
 
   async findById(id: string): Promise<Guild> {
-    const guild = await this.repository.findOneOrFail(id);
+    const guild = await this.repository.findOne(id);
     return guild;
   }
-
-
 
 }
 

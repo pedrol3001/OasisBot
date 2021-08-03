@@ -6,13 +6,14 @@
   "author": "<pedrolcr@outlook.com>",
   "license": "LGPL-3.0",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --exit-child --respawn src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest",
     "lint": "eslint src/**/*.ts"
   },
   "devDependencies": {
     "@types/node": "^16.3.1",
+    "@types/uuid": "^8.3.1",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
     "@typescript-eslint/parser": "^4.28.3",
     "eslint": "^7.30.0",
@@ -33,7 +34,8 @@
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.6.0",
-    "typeorm": "^0.2.34"
+    "typeorm": "^0.2.34",
+    "uuid": "^8.3.2"
   },
   "husky": {
     "hooks": {

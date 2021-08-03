@@ -3,8 +3,6 @@ import path from 'path';
 import Discord from 'discord.js';
 
 import DreamError from "@error/DreamError";
-import ICommand from "commands/ICommand";
-import command from './default/roll_dice';
 import { CommandError } from './error/CommandError';
 import { AbstractHandler } from './handlers/AbstractHandler';
 import { ArgsHandler } from './handlers/implementations/ArgsHandler';
@@ -13,21 +11,25 @@ import { GroupsHandler } from './handlers/implementations/GroupsHandler';
 import { CooldownsHandler } from './handlers/implementations/CooldownsHandler';
 import { PermissionsHandler } from './handlers/implementations/PermissionsHandler';
 
+import ICommand, { ICommandHandler,ICommandGroups } from "interfaces/ICommand";
+import { PluginHandler } from './handlers/implementations/PluginHandler';
 
-class CommandHandler extends AbstractHandler{
+class CommandHandler extends AbstractHandler implements ICommandHandler{
   private _commands: Discord.Collection<string, ICommand>;
 
   public constructor() {
     super();
     this._commands = new Discord.Collection<string, ICommand>();
 
-    this.add(`${path.resolve('src', 'commands', 'default')}`);
+    this.add(`${path.resolve(__dirname, 'default')}`);
 
-    this.setNext(new ArgsHandler())
+    this.setNext(new PluginHandler())
+        .setNext(new ArgsHandler())
         .setNext(new GroupsHandler())
         .setNext(new PermissionsHandler())
         .setNext(new RolesHandler())
         .setNext(new CooldownsHandler());
+
 
   }
 
@@ -67,7 +69,7 @@ class CommandHandler extends AbstractHandler{
       // comand exists
       if (!msg.command) return;
 
-      super.handle(msg);
+      await super.handle(msg);
 
       await msg.command.execute(msg);
     } catch (err) {
@@ -82,7 +84,8 @@ class CommandHandler extends AbstractHandler{
 
   public add(
     folderPath: string,
-    filter?: "guildOnly" | "global" | "dmOnly",
+    plugin?: string,
+    filter?: ICommandGroups
   ): void {
     try {
       const commandFiles = fs
@@ -93,6 +96,11 @@ class CommandHandler extends AbstractHandler{
         delete require.cache[require.resolve(`${folderPath}/${file}`)];
 
         const command: ICommand = require(`${folderPath}/${file}`).default;
+
+
+        if(plugin){
+          command.plugin = plugin;
+        }
 
         const command_exists = this._commands.get(command.name);
         if (command_exists) {
@@ -111,7 +119,7 @@ class CommandHandler extends AbstractHandler{
 
   public remove(
     folderPath: string,
-    filter?: "guildOnly" | "global" | "dmOnly",
+    filter?: ICommandGroups,
   ): void {
     try {
       const commandFiles = fs

@@ -1,4 +1,3 @@
-import ICommand from "commands/ICommand";
 import Discord from "discord.js"
 import IHandler from "./IHandler";
 
@@ -11,9 +10,9 @@ abstract class AbstractHandler implements IHandler
         return handler;
     }
 
-    public handle(msg: Discord.Message): void {
+    public async handle(msg: Discord.Message): Promise<void> {
         if (this.nextHandler) {
-            this.nextHandler.handle(msg);
+            await this.nextHandler.handle(msg);
         }
     }
 }

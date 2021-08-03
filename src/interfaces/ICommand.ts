@@ -1,5 +1,7 @@
 import Discord, { BitFieldResolvable, PermissionString } from 'discord.js';
 
+export type ICommandGroups = "guildOnly" | "global" | "dmOnly";
+
 export default interface ICommand {
   name: string;
   aliases: Array<string>;
@@ -8,8 +10,18 @@ export default interface ICommand {
   description: string;
   usage?: string;
   roles?: Array<string>;
-  group: "guildOnly" | "global" | "dmOnly";
+  group: ICommandGroups;
   permissions?: Array<BitFieldResolvable<PermissionString>>;
 
+  plugin?: string;
+
   execute(msg: Discord.Message): Promise<void>;
+}
+
+export interface ICommandHandler{
+
+  handle(msg: Discord.Message);
+  add(folderPath: string,plugin?: string ,filter?: ICommandGroups);
+  remove(folderPath: string, filter?: ICommandGroups);
+
 }

@@ -1,4 +1,4 @@
-import ICommand from "@command/ICommand";
+import ICommand from "interfaces/ICommand";
 import CommandHandler from "@commands/";
 
 declare module "discord.js" {

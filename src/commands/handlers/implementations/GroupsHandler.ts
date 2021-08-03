@@ -1,5 +1,5 @@
 import Discord from "discord.js"
-import ICommand from "commands/ICommand";
+import ICommand from "interfaces/ICommand";
 import { singleton } from "tsyringe";
 import { CommandError } from "commands/error/CommandError";
 import { AbstractHandler } from "../AbstractHandler";
@@ -7,7 +7,7 @@ import { AbstractHandler } from "../AbstractHandler";
 @singleton()
 class GroupsHandler extends AbstractHandler{
 
-  handle(msg: Discord.Message) : void{
+  async handle(msg: Discord.Message) : Promise<void>{
 
     // filter dmOnly handler
     if (msg.command.group === "dmOnly" && msg.channel.type !== 'dm') {
@@ -15,7 +15,7 @@ class GroupsHandler extends AbstractHandler{
       throw new CommandError(reply ,msg.channel);
     }
 
-    super.handle(msg);
+    await super.handle(msg);
   }
 
 }

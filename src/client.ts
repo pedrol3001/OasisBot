@@ -1,14 +1,17 @@
 import Discord from 'discord.js';
 import CommandHandler from 'commands/index';
-import { LoadGuildController } from "@guilds/useCases/LoadGuild/LoadGuildController";
+import { LoadGuildsController } from "@repositories/guilds/useCases/LoadGuilds/LoadGuildsController";
+import {PluginsController} from './plugins'
 
-const client = new Discord.Client({ shardCount: 1 });
+const client = new Discord.Client({shardCount: 1});
+
 
 client.commandHandler = new CommandHandler();
 
 client.once('ready', () => {
-  const loadGuildController = new LoadGuildController();
-  loadGuildController.handle(client);
+
+  LoadGuildsController.handle(client);
+  PluginsController.handle(client);
 
   client.user.setActivity("Online!");
   console.log('Ready!');
@@ -17,16 +20,11 @@ client.once('ready', () => {
 client.on(
   'message',
   async (msg: Discord.Message): Promise<void> => {
-    try{
       await client.commandHandler.handle(msg);
-    } catch(err){
-      err.log()
-    }
-  },
+  }
 );
 
 client.on("error", (e) => console.error(e));
-client.on("warn", (e) => console.warn(e));
 client.on("debug", (e) => console.info(e));
 
 export {client};

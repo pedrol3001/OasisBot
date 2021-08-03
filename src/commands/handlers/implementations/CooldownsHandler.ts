@@ -1,5 +1,5 @@
 import Discord from "discord.js"
-import ICommand from "commands/ICommand";
+import ICommand from "interfaces/ICommand";
 import { CommandError } from "commands/error/CommandError";
 import { AbstractHandler } from "../AbstractHandler";
 
@@ -19,7 +19,7 @@ class CooldownsHandler extends AbstractHandler{
   }
 
 
-  handle(msg: Discord.Message) : void{
+  async handle(msg: Discord.Message) : Promise<void>{
 
     // cooldowns handler
     if (!this.cooldowns.has(msg.command.name)) {
@@ -47,7 +47,7 @@ class CooldownsHandler extends AbstractHandler{
     timestamps.set(msg.author.id, now);
     setTimeout(() => timestamps.delete(msg.author.id), cooldownAmount);
 
-    super.handle(msg);
+    await super.handle(msg);
 
   }
 

@@ -2,15 +2,15 @@ import Discord from "discord.js"
 import { container } from "tsyringe";
 import { SetGuildPrefixUseCase } from "./SetGuildPrefixUseCase";
 
-class SetGuildPrefixController{
+const SetGuildPrefixController = {
 
 
-  handle(id: string, prefix: string): void {
+  async handle(id: string, prefix: string): Promise<void> {
 
     const setGuildPrefixUseCase = container.resolve(
       SetGuildPrefixUseCase
     );
-    setGuildPrefixUseCase.execute({id, prefix});
+    await setGuildPrefixUseCase.execute({id, prefix});
   }
 
 }

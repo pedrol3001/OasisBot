@@ -1,4 +1,4 @@
-import ICommand from "commands/ICommand";
+import ICommand from "interfaces/ICommand";
 import Discord, { BitFieldResolvable, PermissionString } from 'discord.js';
 
 const command: ICommand = {
@@ -10,8 +10,9 @@ const command: ICommand = {
   group: "global",
 
   async execute(msg: Discord.Message): Promise<void> {
-    msg.args.forEach((arg) => {
-      msg.reply(`Rolled ${Math.floor(Math.random() * Number(arg))}`);
+
+    msg.args.forEach(async (arg) => {
+      await msg.reply(`Rolled ${Math.floor(Math.random() * Number(arg))}`);
     });
   }
 };

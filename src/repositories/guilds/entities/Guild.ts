@@ -1,5 +1,6 @@
+import { Plugin } from '@repositories/plugins/entities/Plugin';
 import Discord from 'discord.js';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
 
 @Entity('guild')
 class Guild {
@@ -10,8 +11,17 @@ class Guild {
   @Column()
   prefix?: string;
 
+  // subject entity
+  @ManyToMany(() => Plugin, plugin => plugin.guilds )
+  @JoinTable({
+    name: "guild_plugin",
+    joinColumns: [{ name: "guild_id" }],
+    inverseJoinColumns: [{ name: "plugin_id" }],
+  })
+  plugins: Promise<Plugin[]>;
+
   constructor(id?: string) {
-    this.id = id || null;
+    this.id = id || 'null';
     if (!this.prefix) {
       this.prefix = process.env.PREFIX || '!';
     }
