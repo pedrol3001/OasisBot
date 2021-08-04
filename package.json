@@ -6,7 +6,8 @@
   "author": "<pedrolcr@outlook.com>",
   "license": "LGPL-3.0",
   "engines": {
-    "node": "14.x"
+    "node": "14.x",
+    "npm": "6.x"
   },
   "scripts": {
     "start": "node ./dist/server.ts",
