@@ -7,12 +7,12 @@
   "license": "LGPL-3.0",
   "scripts": {
     "start": "node ./dist/server.ts",
-    "postinstall": "npm run-script typeorm migration:run",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "heroku-postbuild": "npm run-script build && typeorm migration:run"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
