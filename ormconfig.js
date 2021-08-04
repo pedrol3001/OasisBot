@@ -18,6 +18,9 @@ const ormconfig = {
   password: env !== 'production' ? password : undefined,
   database: env !== 'production' ? database : undefined,
 
+  extra: {
+    ssl: env === 'production'
+  },
 
   url: env === 'production'
     ? (process.env.DATABASE_URL || `${type}://${username}:${password}@${host}:${port}/${database}`)

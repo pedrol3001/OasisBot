@@ -5,6 +5,9 @@
   "private": false,
   "author": "<pedrolcr@outlook.com>",
   "license": "LGPL-3.0",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node ./dist/server.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --respawn src/server.ts",
