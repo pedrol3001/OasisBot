@@ -12,7 +12,7 @@ class ArgsHandler extends AbstractHandler{
       msg.args.length === 0
     ) {
       const reply = `You didn't provide any arguments, ${msg.author}!\n
-        The proper usage would be: \`${process.env.PREFIX}${msg.command.name}
+        The proper usage would be: \`${msg.guild.prefix}${msg.command.name}
         ${msg.command.usage ? msg.command.usage : ''}\``;
 
       throw new CommandError(reply ,msg.channel );
@@ -25,7 +25,7 @@ class ArgsHandler extends AbstractHandler{
     ) {
       const reply = `This command does not require any arguments,
         ${msg.author}!\n
-        The proper usage would be: \`${process.env.PREFIX}${msg.command.name}
+        The proper usage would be: \`${msg.guild.prefix}${msg.command.name}
         ${msg.command.usage ? msg.command.usage : ''}\``;
 
       throw new CommandError(reply, msg.channel );
