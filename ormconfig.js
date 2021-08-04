@@ -27,10 +27,10 @@ const ormconfig = {
     : undefined,
 
   entities: [
-    `./${env === 'production' ? 'dist' :'src'}/repositories/**/entities/*.ts`
+    `./${env === 'production' ? 'dist' :'src'}/repositories/**/entities/${env === 'production' ? '*.js' :'*.ts'}`
   ],
   migrations: [
-    `./${env === 'production' ? 'dist' :'src'}/database/migrations/*.ts`
+    `./${env === 'production' ? 'dist' :'src'}/database/migrations/${env === 'production' ? '*.js' :'*.ts'}`
   ],
   cli: {
     migrationsDir: `./${env === 'production' ? 'dist' :'src'}/database/migrations`
