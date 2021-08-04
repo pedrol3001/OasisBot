@@ -1,6 +1,5 @@
 import Discord from "discord.js"
-import ICommand from "interfaces/ICommand";
-import { CommandError } from "commands/error/CommandError";
+import { CommandError } from "@command/error/CommandError";
 import { AbstractHandler } from "../AbstractHandler";
 
 class CooldownsHandler extends AbstractHandler{

@@ -9,7 +9,7 @@
         "error/*"
       ],
       "@command/*": [
-        "commands/*"
+        "command/*"
       ],
       "@database/*": [
         "database/*"

@@ -1,7 +1,7 @@
 import Discord from "discord.js";
 import IPlugin from "interfaces/IPlugin";
 import { container } from "tsyringe";
-import WerewolfManager from "../../modules/WerewolfManager";
+import WerewolfManager from "./modules/WerewolfManager";
 
 container.registerSingleton<IPlugin>(
   "WerewolfManager",

@@ -1,9 +1,10 @@
 import Discord from 'discord.js';
-import CommandHandler from 'command_handler/index';
+import CommandHandler from '@command/index';
 import { LoadGuildsController } from "@repositories/guild/useCases/LoadGuilds/LoadGuildsController";
 import {PluginsController} from './plugins'
+import DreamError from '@error/DreamError';
 
-const client = new Discord.Client({shardCount: 1});
+const client = new Discord.Client({shardCount: parseInt(process.env.SHARD_COUNT,10)});
 
 
 client.commandHandler = new CommandHandler();
@@ -24,7 +25,12 @@ client.on(
   }
 );
 
-client.on("error", (e) => console.error(e));
-client.on("debug", (e) => console.info(e));
+client.on("error", (err) => {
+  if (err instanceof DreamError)
+    err.log();
+  else
+    console.error(err)
+});
+client.on("debug", (db) => console.info(db));
 
 export {client};

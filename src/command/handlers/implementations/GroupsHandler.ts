@@ -1,7 +1,6 @@
 import Discord from "discord.js"
-import ICommand from "interfaces/ICommand";
 import { singleton } from "tsyringe";
-import { CommandError } from "command_handler/error/CommandError";
+import { CommandError } from "@command/error/CommandError";
 import { AbstractHandler } from "../AbstractHandler";
 
 @singleton()

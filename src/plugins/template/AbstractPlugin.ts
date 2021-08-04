@@ -22,12 +22,12 @@ abstract class AbstractPlugin implements IPlugin{
   }
 
   plug(commands: ICommandHandler):void{
-    const folder = path.resolve('modules', this.constructor.name, 'commands');
+    const folder = path.resolve(__dirname, "..", "modules", this.constructor.name, 'commands');
     commands.add(folder,this.id);
   }
 
   unplug(commands: ICommandHandler):void{
-    const folder = path.resolve('modules', this.constructor.name, 'commands');
+    const folder = path.resolve(__dirname, "..", 'modules', this.constructor.name, 'commands');
     commands.remove(folder);
   }
 }

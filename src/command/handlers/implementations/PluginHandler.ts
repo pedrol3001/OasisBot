@@ -1,4 +1,4 @@
-import { CommandError } from "command_handler/error/CommandError";
+import { CommandError } from "@command/error/CommandError";
 import { CheckGuildPluginController } from "@repositories/guild/useCases/CheckGuildPlugin/CheckGuildPluginController";
 import Discord from "discord.js";
 import { singleton } from "tsyringe";
