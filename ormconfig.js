@@ -18,8 +18,8 @@ const ormconfig = {
   password: env !== 'production' ? password : undefined,
   database: env !== 'production' ? database : undefined,
 
-  extra: {
-    ssl: env === 'production'
+  ssl: {
+    "rejectUnauthorized": false
   },
 
   url: env === 'production'
