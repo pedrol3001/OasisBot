@@ -9,7 +9,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "start": "node ./dist/server.js --trace-warnings",
+    "start": "node ./dist/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
