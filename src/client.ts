@@ -8,7 +8,7 @@ import { CreateGuildController } from '@repositories/guild/useCases/CreateGuild/
 
 
 
-const client = new Discord.Client({shardCount: parseInt(process.env.SHARD_COUNT,10)});
+const client = new Discord.Client({shardCount: parseInt(process.env.SHARD_COUNT,10) || 1});
 
 client.commandHandler = new CommandHandler();
 
