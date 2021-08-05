@@ -29,6 +29,7 @@ client.on(
 client.on('guildCreate',
   async (guild: Discord.Guild): Promise<void> => {
     CreateGuildController.handle({id: guild.id} as ICreateGuildDTO);
+    console.log(`Joinned guild ${guild.name}`);
     guild.systemChannel.send("Welcome to DreamsBot!");
   }
 );
