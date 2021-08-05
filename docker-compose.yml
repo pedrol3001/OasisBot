@@ -14,18 +14,18 @@ services:
     volumes:
       - pgdata:/data/postgres
 
-  app:
-    build: .
-    container_name: dreams_app
-    restart: always
-    ports:
-      - 9229:9229
-    volumes:
-      - .:/usr/app
-    links:
-      - database
-    depends_on:
-      - database
+  #app:
+  #  build: .
+  #  container_name: dreams_app
+  #  restart: always
+  #  ports:
+  #    - 9229:9229
+  #  volumes:
+  #    - .:/usr/app
+  #  links:
+  #    - database
+  #  depends_on:
+  #    - database
 
 volumes:
   pgdata:

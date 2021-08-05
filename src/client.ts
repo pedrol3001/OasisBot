@@ -22,7 +22,7 @@ client.once('ready', () => {
 client.on(
   'message',
   async (msg: Discord.Message): Promise<void> => {
-      await client.commandHandler.handle(msg);
+    await client.commandHandler.handle(msg);
   }
 );
 

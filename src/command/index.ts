@@ -88,9 +88,10 @@ class CommandHandler extends AbstractHandler implements ICommandHandler{
     filter?: ICommandGroups
   ): void {
     try {
+
       const commandFiles = fs
         .readdirSync(folderPath)
-        .filter(file => file.endsWith('.ts'));
+        .filter(file => file.endsWith(process.env.NODE_ENV === 'production' ? '.js' : '.ts'));
 
       for (const file of commandFiles) {
         delete require.cache[require.resolve(`${folderPath}/${file}`)];
@@ -124,8 +125,7 @@ class CommandHandler extends AbstractHandler implements ICommandHandler{
     try {
       const commandFiles = fs
         .readdirSync(folderPath)
-        .filter(file => file.endsWith('.ts'));
-
+        .filter(file => file.endsWith(process.env.NODE_ENV === 'production' ? '.js' : '.ts'));
 
       for (const file of commandFiles) {
         delete require.cache[require.resolve(`${folderPath}/${file}`)];
