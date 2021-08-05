@@ -6,9 +6,7 @@ import { PluginsController } from './plugins'
 import { LoadGuildsController } from "@repositories/guild/useCases/LoadGuilds/LoadGuildsController";
 import { CreateGuildController } from '@repositories/guild/useCases/CreateGuild/CreateGuildController';
 
-
-
-const client = new Discord.Client({shardCount: parseInt(process.env.SHARD_COUNT,10) || 1});
+const client = new Discord.Client({shardCount: parseInt(process.env.SHARD_COUNT || "1",10)});
 
 client.commandHandler = new CommandHandler();
 
