@@ -18,19 +18,19 @@ const ormconfig = {
   password: env !== 'production' ? password : undefined,
   database: env !== 'production' ? database : undefined,
 
-  ssl: {
+  ssl: env === 'production' ? {
     "rejectUnauthorized": false
-  },
+  } : undefined,
 
   url: env === 'production'
     ? (process.env.DATABASE_URL || `${type}://${username}:${password}@${host}:${port}/${database}`)
     : undefined,
 
   entities: [
-    `./${env === 'production' ? 'dist' :'src'}/repositories/**/entities/${env === 'production' ? '*.js' :'*.ts'}`
+    `${env === 'production' ? './dist' :'./src'}/repositories/**/entities/*{.ts,.js}`
   ],
   migrations: [
-    `./${env === 'production' ? 'dist' :'src'}/database/migrations/${env === 'production' ? '*.js' :'*.ts'}`
+    `${env === 'production' ? './dist' :'./src'}/database/migrations/*{.ts,.js}`
   ],
   cli: {
     migrationsDir: `./${env === 'production' ? 'dist' :'src'}/database/migrations`

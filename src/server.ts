@@ -1,10 +1,19 @@
 import "dotenv/config";
 import "reflect-metadata";
-import "@database/typeorm";
 import "@repositories/index";
-
-import {client} from './client';
-
-client.login(process.env.DISC_TOKEN);
+import { client } from './client';
+import { ConnectDb } from "@database/typeorm";
 
 
+ConnectDb().then(
+  (connection) => {
+    console.log("Connected to database: ", connection.isConnected);
+    client.login(process.env.DISC_TOKEN);
+  }
+).catch(
+  (err) => {
+    console.error(err);
+  }
+);
+
+//

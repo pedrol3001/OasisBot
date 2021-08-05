@@ -6,11 +6,10 @@
   "author": "<pedrolcr@outlook.com>",
   "license": "LGPL-3.0",
   "engines": {
-    "node": "14.x",
-    "npm": "6.x"
+    "node": "14.x"
   },
   "scripts": {
-    "start": "node ./dist/server.ts",
+    "start": "node ./dist/server.js --trace-warnings",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",

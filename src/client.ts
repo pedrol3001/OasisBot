@@ -1,13 +1,14 @@
 import Discord from 'discord.js';
-import CommandHandler from '@command/index';
-import { LoadGuildsController } from "@repositories/guild/useCases/LoadGuilds/LoadGuildsController";
-import {PluginsController} from './plugins'
 import DreamError from '@error/DreamError';
-import { CreateGuildController } from '@repositories/guild/useCases/CreateGuild/CreateGuildController';
+import CommandHandler from '@command/index';
 import { ICreateGuildDTO } from '@repositories/guild/dtos/ICreateGuildDTO';
+import { PluginsController } from './plugins'
+import { LoadGuildsController } from "@repositories/guild/useCases/LoadGuilds/LoadGuildsController";
+import { CreateGuildController } from '@repositories/guild/useCases/CreateGuild/CreateGuildController';
+
+
 
 const client = new Discord.Client({shardCount: parseInt(process.env.SHARD_COUNT,10)});
-
 
 client.commandHandler = new CommandHandler();
 

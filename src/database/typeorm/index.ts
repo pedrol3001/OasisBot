@@ -1,14 +1,18 @@
-import { Connection, createConnection, getConnectionOptions } from 'typeorm';
 
-interface IOptions {
-  host: string;
-}
+import { Connection, createConnection, getConnectionOptions } from "typeorm";
 
-getConnectionOptions().then(options => {
-  const newOptions = options as IOptions;
-  newOptions.host = process.env.NODE_ENV === 'production' ? 'localhost' : 'database';
-  createConnection({
-    ...options,
-  });
-});
+async function ConnectDb() : Promise<Connection> {
+  const defaultOptions = await getConnectionOptions();
 
+  return createConnection(
+    Object.assign(defaultOptions, {
+      host: process.env.NODE_ENV === "production" ? "localhost" : "database",
+      database:
+        process.env.NODE_ENV === "test"
+          ? "dream_test"
+          : defaultOptions.database,
+    })
+  );
+};
+
+export { ConnectDb };
