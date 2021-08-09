@@ -22,10 +22,10 @@ const ormconfig = {
     `${env === 'production' ? './dist' :'./src'}/repositories/**/entities/*{.ts,.js}`
   ],
   migrations: [
-    `${env === 'production' ? './dist' :'./src'}/database/migrations/*{.ts,.js}`
+    `${env === 'production' ? './dist' :'./src'}/database/typeorm/migrations/*{.ts,.js}`
   ],
   cli: {
-    migrationsDir: `${env === 'production' ? './dist' :'./src'}/database/migrations`
+    migrationsDir: `${env === 'production' ? './dist' :'./src'}/database/typeorm/migrations`
   },
   synchronize: true,
 };

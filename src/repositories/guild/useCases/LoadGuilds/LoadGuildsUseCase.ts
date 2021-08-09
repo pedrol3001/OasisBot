@@ -15,10 +15,11 @@ class LoadGuildsUseCase {
 
     await Promise.all(guilds.map(async (guild) => {
       const defaultGuild: Guild = new Guild(guild.id);
-      try{
-        const guildFromDb = await this.guildRepository.findById(guild.id);
+
+      const guildFromDb = await this.guildRepository.findById(guild.id);
+      if (guildFromDb) {
         Object.assign(guild,guildFromDb);
-      }catch(e){
+      }else{
         Object.assign(guild,defaultGuild);
       }
     }));

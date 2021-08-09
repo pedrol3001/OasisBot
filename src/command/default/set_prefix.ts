@@ -1,4 +1,3 @@
-import DreamError from '@error/DreamError';
 import { SetGuildPrefixController } from '@repositories/guild/useCases/SetGuildPrefix/SetGuildPrefixController';
 import ICommand from 'interfaces/ICommand';
 import Discord from 'discord.js';

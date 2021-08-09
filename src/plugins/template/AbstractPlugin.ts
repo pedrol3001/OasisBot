@@ -1,3 +1,5 @@
+import { AddCommandsFromFolder } from "@command/providers/AddCommands/implementations/AddCommandsFromFolder";
+import { RemoveCommandsFromFolder } from "@command/providers/RemoveCommands/implementations/RemoveCommandsFromFolder";
 import { CreatePluginController } from "@repositories/plugin/useCases/CreatePlugin/CreatePluginController";
 import { GetByNameController } from "@repositories/plugin/useCases/GetByName/GetByNameController";
 import Discord from "discord.js";
@@ -23,12 +25,12 @@ abstract class AbstractPlugin implements IPlugin{
 
   plug(commands: ICommandHandler):void{
     const folder = path.resolve(__dirname, "..", "modules", this.constructor.name, 'commands');
-    commands.add(folder,this.id);
+    commands.edit(AddCommandsFromFolder, folder,this.id);
   }
 
   unplug(commands: ICommandHandler):void{
     const folder = path.resolve(__dirname, "..", 'modules', this.constructor.name, 'commands');
-    commands.remove(folder);
+    commands.edit(RemoveCommandsFromFolder, folder);
   }
 }
 

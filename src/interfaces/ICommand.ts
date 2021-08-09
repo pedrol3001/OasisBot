@@ -1,3 +1,5 @@
+import { IAddCommands } from '@command/providers/AddCommands/IAddCommands';
+import { IRemoveCommands } from '@command/providers/RemoveCommands/IRemoveCommands';
 import Discord, { BitFieldResolvable, PermissionString } from 'discord.js';
 
 export type ICommandGroups = "guildOnly" | "global" | "dmOnly";
@@ -21,7 +23,6 @@ export default interface ICommand {
 export interface ICommandHandler{
 
   handle(msg: Discord.Message);
-  add(folderPath: string,plugin?: string ,filter?: ICommandGroups);
-  remove(folderPath: string, filter?: ICommandGroups);
+  edit (AddType: new () => IAddCommands | IRemoveCommands, ...args);
 
 }

@@ -9,5 +9,6 @@ declare module "discord.js" {
   export interface Message{
       args: Array<string>
       command: ICommand
+      prefix: string
   }
 }

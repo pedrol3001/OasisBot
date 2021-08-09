@@ -1,11 +1,9 @@
 import { CommandError } from "@command/error/CommandError";
 import { CheckGuildPluginController } from "@repositories/guild/useCases/CheckGuildPlugin/CheckGuildPluginController";
 import Discord from "discord.js";
-import { singleton } from "tsyringe";
 import { AbstractHandler } from "../AbstractHandler";
 
-@singleton()
-class PluginHandler extends AbstractHandler{
+class PluginsHandler extends AbstractHandler{
 
   async handle(msg: Discord.Message) : Promise<void>{
 
@@ -20,4 +18,4 @@ class PluginHandler extends AbstractHandler{
   }
 }
 
-export {PluginHandler}
+export {PluginsHandler}

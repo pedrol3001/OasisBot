@@ -1,5 +1,5 @@
 import ICommand from "interfaces/ICommand";
-import Discord, { BitFieldResolvable, PermissionString } from 'discord.js';
+import Discord from 'discord.js';
 
 const command: ICommand = {
   name: 'roll dice',
@@ -7,7 +7,7 @@ const command: ICommand = {
   args: true,
   usage: '[n]',
   description: 'Roll a dice of n faces',
-  group: "global",
+  group: 'global',
 
   async execute(msg: Discord.Message): Promise<void> {
 

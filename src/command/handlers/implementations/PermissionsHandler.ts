@@ -1,10 +1,8 @@
 import Discord from "discord.js";
-import { singleton } from "tsyringe";
 import { CommandError } from "@command/error/CommandError";
 import { AbstractHandler } from "../AbstractHandler";
 
 
-@singleton()
 class PermissionsHandler extends AbstractHandler{
 
   async handle(msg: Discord.Message) : Promise<void>{
