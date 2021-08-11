@@ -1,8 +1,8 @@
 import Discord from 'discord.js';
-import DreamError from '@error/DreamError';
 import CommandHandler from '@command/index';
-import { ICreateGuildDTO } from '@repositories/guild/dtos/ICreateGuildDTO';
+import DreamError from '@error/DreamError';
 import { PluginsController } from './plugins'
+import { ICreateGuildDTO } from '@repositories/guild/dtos/ICreateGuildDTO';
 import { LoadGuildsController } from "@repositories/guild/useCases/LoadGuilds/LoadGuildsController";
 import { CreateGuildController } from '@repositories/guild/useCases/CreateGuild/CreateGuildController';
 

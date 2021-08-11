@@ -1,7 +1,7 @@
 import Discord from "discord.js";
 import { inject, injectable } from "tsyringe";
-import { Guild } from "@guilds_repo/entities/Guild";
-import { IGuildsRepository } from "@guilds_repo/repository/IGuildsRepository";
+import { Guild } from "@repositories/guild/infra/typeorm/entities/Guild";
+import { IGuildsRepository } from "@repositories/guild/infra/typeorm/repository/IGuildsRepository";
 
 
 @injectable()
@@ -17,6 +17,7 @@ class LoadGuildsUseCase {
       const defaultGuild: Guild = new Guild(guild.id);
 
       const guildFromDb = await this.guildRepository.findById(guild.id);
+
       if (guildFromDb) {
         Object.assign(guild,guildFromDb);
       }else{

@@ -8,11 +8,12 @@ module.exports = {
       "module-resolver",
       {
         alias: {
-          "@error": "./src/error/",
-          "@command": "./src/command/",
-          "@database": "./src/database/",
+          "@error": "./src/shared/error/",
+          "@config": "./src/config",
+          "@discord": "./src/shared/infra/discord/",
+          "@command": "./src/shared/infra/discord/command/",
+          "@database": "./src/shared/infra/database/",
           "@repositories": "./src/repositories/",
-          "@plugins_template": "./src/plugins/template/",
           "@guilds_repo": "./src/repositories/guild/",
           "@plugins_repo": "./src/repositories/plugin/"
         },

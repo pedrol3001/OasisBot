@@ -1,9 +1,9 @@
-import ICommand from "interfaces/ICommand";
+import ICommand from "@discord/interfaces/ICommand";
 import Discord from 'discord.js';
 
 const command: ICommand = {
-  name: 'test',
-  aliases: ['t'],
+  name: 'test wf',
+  aliases: ['twf'],
   args: true,
   usage: 'Test',
   description: 'Test',

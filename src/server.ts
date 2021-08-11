@@ -1,9 +1,9 @@
 import "dotenv/config";
 import "reflect-metadata";
+import "@config/enviroment"
 import "@repositories/index";
 import { client } from './client';
 import { ConnectDb } from "@database/typeorm";
-
 
 ConnectDb().then(
   (connection) => {
@@ -16,4 +16,3 @@ ConnectDb().then(
   }
 );
 
-//

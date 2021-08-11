@@ -1,5 +1,5 @@
 import { container } from "tsyringe";
-import { Plugin } from "@plugins_repo/entities/Plugin"
+import { Plugin } from "@repositories/plugin/infra/typeorm/entities/Plugin"
 import { GetByNameUseCase } from "./GetByNameUseCase";
 
 const GetByNameController = {

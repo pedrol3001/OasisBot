@@ -6,19 +6,22 @@
     "baseUrl": "./src",
     "paths": {
       "@error/*": [
-        "error/*"
+        "shared/error/*"
+      ],
+      "@config/*": [
+        "config/*"
       ],
       "@command/*": [
-        "command/*"
+        "shared/infra/discord/command/*"
       ],
       "@database/*": [
-        "database/*"
+        "shared/infra/database/*"
+      ],
+      "@discord/*": [
+        "shared/infra/discord/*"
       ],
       "@repositories/*": [
         "repositories/*"
-      ],
-      "@plugins_template/*": [
-        "plugins/template/*"
       ],
       "@guilds_repo/*": [
         "repositories/guild/*"
