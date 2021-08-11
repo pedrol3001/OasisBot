@@ -12,13 +12,11 @@ const cmd: ICommand = {
   group: 'guildOnly',
 
   async execute(msg: Discord.Message): Promise<void> {
-
     const prefix = msg.args[0];
     await SetGuildPrefixController.handle(msg.guild.id, prefix);
     msg.guild.prefix = prefix;
     await msg.channel.send(`Prefix for ${msg.guild.name} has been set to ${prefix}`);
-
-  }
+  },
 };
 
 export default cmd;

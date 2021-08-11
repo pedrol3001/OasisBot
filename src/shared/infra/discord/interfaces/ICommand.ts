@@ -1,6 +1,6 @@
 import Discord, { BitFieldResolvable, PermissionString } from 'discord.js';
 
-export type ICommandGroups = "guildOnly" | "global" | "dmOnly";
+export type ICommandGroups = 'guildOnly' | 'global' | 'dmOnly';
 
 export default interface ICommand {
   name: string;

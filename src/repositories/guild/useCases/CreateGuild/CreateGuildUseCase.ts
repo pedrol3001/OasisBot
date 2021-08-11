@@ -1,19 +1,17 @@
-import { IGuildsRepository } from "@repositories/guild/infra/typeorm/repository/IGuildsRepository";
-import { inject, injectable } from "tsyringe";
-import { ICreateGuildDTO } from "@repositories/guild/dtos/ICreateGuildDTO";
+import { IGuildsRepository } from '@repositories/guild/infra/typeorm/repository/IGuildsRepository';
+import { inject, injectable } from 'tsyringe';
+import { ICreateGuildDTO } from '@repositories/guild/dtos/ICreateGuildDTO';
 
 @injectable()
-class CreateGuildUseCase{
-
+class CreateGuildUseCase {
   constructor(
-    @inject("GuildsRepository")
-    private guildRepository: IGuildsRepository
+    @inject('GuildsRepository')
+    private guildRepository: IGuildsRepository,
   ) {}
 
-  public async execute(data : ICreateGuildDTO): Promise<void> {
+  public async execute(data: ICreateGuildDTO): Promise<void> {
     await this.guildRepository.create(data);
   }
-
 }
 
-export {CreateGuildUseCase};
+export { CreateGuildUseCase };

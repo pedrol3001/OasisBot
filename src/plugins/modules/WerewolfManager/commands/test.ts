@@ -1,4 +1,4 @@
-import ICommand from "@discord/interfaces/ICommand";
+import ICommand from '@discord/interfaces/ICommand';
 import Discord from 'discord.js';
 
 const command: ICommand = {
@@ -7,11 +7,11 @@ const command: ICommand = {
   args: true,
   usage: 'Test',
   description: 'Test',
-  group: "global",
+  group: 'global',
 
   async execute(msg: Discord.Message): Promise<void> {
-    await msg.reply("Teste 123");
-  }
+    await msg.reply('Teste 123');
+  },
 };
 
 export default command;

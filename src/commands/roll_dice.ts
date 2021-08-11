@@ -1,4 +1,4 @@
-import ICommand from "@discord/interfaces/ICommand";
+import ICommand from '@discord/interfaces/ICommand';
 import Discord from 'discord.js';
 
 const command: ICommand = {
@@ -10,11 +10,10 @@ const command: ICommand = {
   group: 'global',
 
   async execute(msg: Discord.Message): Promise<void> {
-
     msg.args.forEach(async (arg) => {
       await msg.reply(`Rolled ${Math.floor(Math.random() * Number(arg))}`);
     });
-  }
+  },
 };
 
 export default command;

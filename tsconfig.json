@@ -5,30 +5,14 @@
     "rootDir": "./",
     "baseUrl": "./src",
     "paths": {
-      "@error/*": [
-        "shared/error/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-      "@command/*": [
-        "shared/infra/discord/command/*"
-      ],
-      "@database/*": [
-        "shared/infra/database/*"
-      ],
-      "@discord/*": [
-        "shared/infra/discord/*"
-      ],
-      "@repositories/*": [
-        "repositories/*"
-      ],
-      "@guilds_repo/*": [
-        "repositories/guild/*"
-      ],
-      "@plugins_repo/*": [
-        "repositories/plugin/*"
-      ],
+      "@error/*": ["shared/error/*"],
+      "@config/*": ["config/*"],
+      "@command/*": ["shared/infra/discord/command/*"],
+      "@database/*": ["shared/infra/database/*"],
+      "@discord/*": ["shared/infra/discord/*"],
+      "@repositories/*": ["repositories/*"],
+      "@guilds_repo/*": ["repositories/guild/*"],
+      "@plugins_repo/*": ["repositories/plugin/*"]
     },
     "outDir": "./dist",
     "esModuleInterop": true,

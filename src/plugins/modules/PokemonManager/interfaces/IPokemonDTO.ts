@@ -1,4 +1,4 @@
-export interface IPokemonDTO{
-    id: number;
-    name: string;
+export interface IPokemonDTO {
+  id: number;
+  name: string;
 }

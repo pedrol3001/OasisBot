@@ -1,4 +1,4 @@
-
+const { root_dir } = require('@config/enviroment');
 
 const type = process.env.TYPEORM_TYPE || 'postgres';
 const username = process.env.TYPEORM_USERNAME || 'docker';
@@ -9,26 +9,24 @@ const database = process.env.TYPEORM_DATABASE || 'dreams';
 const env = process.env.NODE_ENV || 'dev';
 
 const ormconfig = {
+  type: 'postgres',
 
-  type: "postgres",
-
-  ssl: env === 'production' ? {
-    "rejectUnauthorized": false
-  } : undefined,
+  ssl:
+    env === 'production'
+      ? {
+          rejectUnauthorized: false,
+        }
+      : undefined,
 
   url: process.env.DATABASE_URL || `${type}://${username}:${password}@${host}:${port}/${database}`,
 
-  entities: [
-    `${env === 'production' ? './dist' :'./src'}/repositories/**/entities/*{.ts,.js}`
-  ],
-  migrations: [
-    `${env === 'production' ? './dist' :'./src'}/database/typeorm/migrations/*{.ts,.js}`
-  ],
+  entities: [`./${root_dir}/repositories/**/entities/*{.ts,.js}`],
+  migrations: [`${root_dir}/database/typeorm/migrations/*{.ts,.js}`],
   cli: {
-    migrationsDir: `${env === 'production' ? './dist' :'./src'}/database/typeorm/migrations`
+    migrationsDir: `${root_dir}/database/typeorm/migrations`,
   },
+
   synchronize: true,
 };
-
 
 module.exports = ormconfig;

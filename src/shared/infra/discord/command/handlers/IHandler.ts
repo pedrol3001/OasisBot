@@ -1,7 +1,7 @@
-import Discord from "discord.js"
+import Discord from 'discord.js';
 
 export default interface IHandler {
   setNext(handler: IHandler): IHandler;
 
-  handle(msg: Discord.Message) : Promise<void>;
+  handle(msg: Discord.Message): Promise<void>;
 }

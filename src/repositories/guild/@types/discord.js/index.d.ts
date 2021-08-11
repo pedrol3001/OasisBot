@@ -1,5 +1,5 @@
-declare module "discord.js" {
+declare module 'discord.js' {
   export interface Guild {
-      prefix: string
+    prefix: string;
   }
 }

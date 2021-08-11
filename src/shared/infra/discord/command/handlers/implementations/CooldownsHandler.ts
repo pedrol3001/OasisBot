@@ -1,25 +1,16 @@
-import Discord from "discord.js"
-import { CommandError } from "@command/error/CommandError";
-import { AbstractHandler } from "../AbstractHandler";
+import Discord from 'discord.js';
+import { CommandError } from '@command/error/CommandError';
+import { AbstractHandler } from '../AbstractHandler';
 
-class CooldownsHandler extends AbstractHandler{
-
-  private cooldowns: Discord.Collection<
-    string,
-    Discord.Collection<string, number>
-  >;
+class CooldownsHandler extends AbstractHandler {
+  private cooldowns: Discord.Collection<string, Discord.Collection<string, number>>;
 
   public constructor() {
     super();
-    this.cooldowns = new Discord.Collection<
-      string,
-      Discord.Collection<string, number>
-    >();
+    this.cooldowns = new Discord.Collection<string, Discord.Collection<string, number>>();
   }
 
-
-  async handle(msg: Discord.Message) : Promise<void>{
-
+  async handle(msg: Discord.Message): Promise<void> {
     // cooldowns handler
     if (!this.cooldowns.has(msg.command.name)) {
       this.cooldowns.set(msg.command.name, new Discord.Collection());
@@ -34,12 +25,11 @@ class CooldownsHandler extends AbstractHandler{
 
       if (now < expirationTime) {
         const timeLeft = (expirationTime - now) / 1000;
-        const reply =
-          `Please wait ${timeLeft.toFixed(
-            1,
-          )} more second(s) before reusing the \`${msg.command.name}\` command.`;
+        const reply = `Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${
+          msg.command.name
+        }\` command.`;
 
-        throw new CommandError(reply ,msg.channel );
+        throw new CommandError(reply, msg.channel);
       }
     }
 
@@ -47,9 +37,7 @@ class CooldownsHandler extends AbstractHandler{
     setTimeout(() => timestamps.delete(msg.author.id), cooldownAmount);
 
     await super.handle(msg);
-
   }
-
 }
 
-export {CooldownsHandler}
+export { CooldownsHandler };

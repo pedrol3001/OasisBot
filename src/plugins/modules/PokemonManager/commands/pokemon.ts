@@ -1,4 +1,4 @@
-import ICommand from "@discord/interfaces/ICommand";
+import ICommand from '@discord/interfaces/ICommand';
 import Discord from 'discord.js';
 
 const command: ICommand = {
@@ -6,11 +6,11 @@ const command: ICommand = {
   aliases: ['pkm'],
   args: false,
   description: 'Spawn a random pokemon',
-  group: "guildOnly",
+  group: 'guildOnly',
 
   async execute(msg: Discord.Message): Promise<void> {
-    await msg.reply("Teste 123");
-  }
+    await msg.reply('Teste 123');
+  },
 };
 
 export default command;

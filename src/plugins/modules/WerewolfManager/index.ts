@@ -1,9 +1,5 @@
-import { AbstractPlugin } from "../../class/AbstractPlugin";
+import { AbstractPlugin } from '../../class/AbstractPlugin';
 
-class WerewolfManager extends AbstractPlugin {
-
-
-
-}
+class WerewolfManager extends AbstractPlugin {}
 
 export default WerewolfManager;

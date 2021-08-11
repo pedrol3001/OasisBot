@@ -15,7 +15,8 @@
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
-    "heroku-postbuild": "npm run-script build && typeorm migration:run"
+    "heroku-postbuild": "npm run-script build && typeorm migration:run",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
@@ -32,14 +33,16 @@
     "@typescript-eslint/parser": "^4.28.3",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
-    "eslint": "^7.30.0",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-promise": "^5.1.0",
-    "prettier": "^2.3.2",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
+    "prettier": "2.3.2",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.10.1",
     "typescript": "^4.3.5"
@@ -55,9 +58,7 @@
     "typeorm": "^0.2.34",
     "uuid": "^8.3.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint"
-    }
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

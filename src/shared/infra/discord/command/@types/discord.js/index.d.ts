@@ -1,15 +1,15 @@
-import ICommand from "@discord/interfaces/ICommand";
-import CommandHandler from "@commands/";
+import ICommand from '@discord/interfaces/ICommand';
+import CommandHandler from '@commands/';
 
-declare module "discord.js" {
+declare module 'discord.js' {
   export interface Client {
-      commandHandler: CommandHandler
+    commandHandler: CommandHandler;
   }
 
-  export interface Message{
-      args: Array<string>
-      command: ICommand
-      prefix: string
-      manager: AbstractPlugin
+  export interface Message {
+    args: Array<string>;
+    command: ICommand;
+    prefix: string;
+    manager: AbstractPlugin;
   }
 }

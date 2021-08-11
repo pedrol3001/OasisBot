@@ -1,18 +1,17 @@
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Guild } from '@repositories/guild/infra/typeorm/entities/Guild';
 import { Column, Entity, ManyToMany, PrimaryColumn, Unique } from 'typeorm';
 
 @Entity('plugin')
 @Unique(['name'])
 class Plugin {
-
   @PrimaryColumn()
   id: string;
 
   @Column()
   name?: string;
 
-  @ManyToMany(() => Guild, guild => guild.plugins)
+  @ManyToMany(() => Guild, (guild) => guild.plugins)
   guilds: Promise<Guild[]>;
 
   constructor() {
@@ -22,6 +21,4 @@ class Plugin {
   }
 }
 
-
-
-export {Plugin};
+export { Plugin };

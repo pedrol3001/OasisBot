@@ -1,28 +1,25 @@
-import { IGuildsRepository } from "@repositories/guild/infra/typeorm/repository/IGuildsRepository";
-import { inject, injectable } from "tsyringe";
+import { IGuildsRepository } from '@repositories/guild/infra/typeorm/repository/IGuildsRepository';
+import { inject, injectable } from 'tsyringe';
 
 interface IPrefixChange {
   id: string;
   prefix: string;
 }
 
-
 @injectable()
-class SetGuildPrefixUseCase{
-
+class SetGuildPrefixUseCase {
   constructor(
-    @inject("GuildsRepository")
-    private guildRepository: IGuildsRepository
+    @inject('GuildsRepository')
+    private guildRepository: IGuildsRepository,
   ) {}
 
-  public async execute({id, prefix}: IPrefixChange): Promise<void> {
+  public async execute({ id, prefix }: IPrefixChange): Promise<void> {
     const guild = await this.guildRepository.findById(id);
 
     guild.prefix = prefix;
 
     await this.guildRepository.create(guild);
   }
-
 }
 
-export {SetGuildPrefixUseCase};
+export { SetGuildPrefixUseCase };

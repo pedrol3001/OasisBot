@@ -3,7 +3,6 @@ import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
 
 @Entity('guild')
 class Guild {
-
   @PrimaryColumn()
   id: string;
 
@@ -11,11 +10,11 @@ class Guild {
   prefix?: string;
 
   // subject entity
-  @ManyToMany(() => Plugin, plugin => plugin.guilds )
+  @ManyToMany(() => Plugin, (plugin) => plugin.guilds)
   @JoinTable({
-    name: "guild_plugin",
-    joinColumns: [{ name: "guild_id" }],
-    inverseJoinColumns: [{ name: "plugin_id" }],
+    name: 'guild_plugin',
+    joinColumns: [{ name: 'guild_id' }],
+    inverseJoinColumns: [{ name: 'plugin_id' }],
   })
   plugins: Plugin[];
 
@@ -27,4 +26,4 @@ class Guild {
   }
 }
 
-export {Guild};
+export { Guild };
