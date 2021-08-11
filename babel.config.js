@@ -6,7 +6,7 @@ module.exports = {
       {
         alias: {
           '@error': './src/shared/error/',
-          '@config': './src/config',
+          '@config': './src/config/',
           '@discord': './src/shared/infra/discord/',
           '@command': './src/shared/infra/discord/command/',
           '@database': './src/shared/infra/database/',
