@@ -2,8 +2,9 @@ import 'dotenv/config';
 import 'reflect-metadata';
 import '@config/enviroment';
 import '@repositories/index';
-import { client } from './client';
 import { ConnectDb } from '@database/typeorm';
+
+import { client } from './client';
 
 ConnectDb()
   .then((connection) => {
