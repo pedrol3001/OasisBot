@@ -14,9 +14,7 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest",
-    "lint": "eslint src/**/*.ts",
-    "heroku-postbuild": "npm run-script build && typeorm migration:run",
-    "postinstall": "husky install"
+    "heroku-postbuild": "npm run-script build && typeorm migration:run"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
