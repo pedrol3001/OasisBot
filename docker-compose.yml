@@ -3,20 +3,20 @@ version: '3.9'
 services:
   database:
     image: postgres
-    container_name: dreams_database
+    container_name: oasiss_database
     restart: always
     ports:
       - 5432:5432
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=dreams
+      - POSTGRES_DB=oasiss
     volumes:
       - pgdata:/data/postgres
 
   #app:
   #  build: .
-  #  container_name: dreams_app
+  #  container_name: oasiss_app
   #  restart: always
   #  ports:
   #    - 9229:9229

@@ -1,5 +1,5 @@
 import { SetGuildPrefixController } from '@repositories/guild/useCases/SetGuildPrefix/SetGuildPrefixController';
-import ICommand from '@discord/interfaces/ICommand';
+import ICommand from 'oasis/interfaces/ICommand';
 import Discord from 'discord.js';
 
 const cmd: ICommand = {

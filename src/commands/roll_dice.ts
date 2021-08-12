@@ -1,4 +1,4 @@
-import ICommand from '@discord/interfaces/ICommand';
+import ICommand from 'oasis/interfaces/ICommand';
 import Discord from 'discord.js';
 
 const command: ICommand = {

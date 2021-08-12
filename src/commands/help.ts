@@ -1,4 +1,4 @@
-import ICommand from '@discord/interfaces/ICommand';
+import ICommand from 'oasis/interfaces/ICommand';
 import Discord, { MessageAttachment } from 'discord.js';
 import { CheckGuildsPluginController } from '@repositories/guild/useCases/CheckGuildsPlugin/CheckGuildsPluginController';
 
