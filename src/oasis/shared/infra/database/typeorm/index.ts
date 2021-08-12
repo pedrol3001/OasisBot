@@ -1,5 +1,5 @@
 import { Connection, createConnection, getConnectionOptions } from 'typeorm';
-import { ormconfig } from '../../../../config/ormconfig';
+import ormconfig from '../../../../config/ormconfig';
 
 async function ConnectDb(): Promise<Connection> {
   return createConnection(

@@ -14,7 +14,7 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest",
-    "heroku-postbuild": "npm run-script build && typeorm migration:run"
+    "heroku-postbuild": "npm run-script build && ./node_modules/.bin/typeorm migration:run -f dist/oasis/config/ormconfig.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",

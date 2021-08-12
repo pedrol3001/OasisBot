@@ -1,4 +1,3 @@
-import '@config/enviroment';
 import '@repositories/index';
 
 import { ConnectDb } from '@database/typeorm';
