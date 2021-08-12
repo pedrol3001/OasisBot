@@ -3,7 +3,7 @@ import { CheckGuildsPluginController } from '@repositories/guild/useCases/CheckG
 import Discord from 'discord.js';
 import { IMicroHandler } from '../IMicroHandler';
 
-class PluginsMicroHandler implements IMicroHandler {
+class PluginsMicroHandler {
   async handle(msg: Discord.Message): Promise<void> {
     const guild_id = msg.guild?.id || undefined;
     const author_id = msg.author.id;
