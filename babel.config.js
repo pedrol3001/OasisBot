@@ -1,3 +1,5 @@
+const tsconfig = require('./tsconfig.json');
+
 module.exports = {
   presets: [['@babel/preset-env', { targets: { node: 'current' } }], '@babel/preset-typescript'],
   plugins: [
@@ -7,8 +9,8 @@ module.exports = {
         alias: {
           '@error': './src/oasis/shared/error/',
           '@config': './src/oasis/config/',
-          '@interfaces': './src/oasis/interfaces/*',
-          '@plugin': './src/oasis/shared/infra/discord/plugins/*',
+          '@interfaces': './src/oasis/interfaces/',
+          '@plugin': './src/oasis/shared/infra/discord/plugins/',
           '@discord': './src/oasis/shared/infra/discord/',
           '@command': './src/oasis/shared/infra/discord/command/',
           '@database': './src/oasis/shared/infra/database/',
