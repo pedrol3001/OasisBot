@@ -12,7 +12,7 @@ const ormconfig = {
   type: 'postgres',
 
   ssl:
-    env !== 'production'
+    env === 'production'
       ? {
           rejectUnauthorized: false,
         }
