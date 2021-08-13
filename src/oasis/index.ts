@@ -48,7 +48,7 @@ class Oasis {
     client.on('guildCreate', async (guild: Guild): Promise<void> => {
       CreateGuildController.handle({ id: guild.id } as ICreateGuildDTO);
       console.log(`Joinned guild ${guild.name}`);
-      guild.systemChannel.send('Welcome to oasissBot!');
+      guild.systemChannel.send('Welcome to oasisBot!');
     });
 
     client.on('error', (err) => {
