@@ -1,4 +1,4 @@
-const { root_dir } = require('./enviroment');
+const { root_dir } = require('./src/config/enviroment');
 
 const type = process.env.TYPEORM_TYPE || 'postgres';
 const username = process.env.TYPEORM_USERNAME || 'docker';

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Guild } from '@repositories/guild/infra/typeorm/entities/Guild';
+import { Guild } from '@guild/infra/typeorm/entities/Guild';
 import { Column, Entity, ManyToMany, PrimaryColumn, Unique } from 'typeorm';
 
 @Entity('plugin')

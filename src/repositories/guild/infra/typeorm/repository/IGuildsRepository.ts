@@ -1,5 +1,5 @@
-import { ICreateGuildDTO } from '@repositories/guild/dtos/ICreateGuildDTO';
-import { Guild } from '@repositories/guild/infra/typeorm/entities/Guild';
+import { ICreateGuildDTO } from '@guild/dtos/ICreateGuildDTO';
+import { Guild } from '@guild/infra/typeorm/entities/Guild';
 import { ConditionalArray } from 'utils/types';
 
 interface IGuildsRepository {

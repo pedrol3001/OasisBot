@@ -1,4 +1,4 @@
-import { IGuildsRepository } from '@repositories/guild/infra/typeorm/repository/IGuildsRepository';
+import { IGuildsRepository } from 'repositories/guild/infra/typeorm/repository/IGuildsRepository';
 import { inject, injectable } from 'tsyringe';
 
 interface IPrefixChange {

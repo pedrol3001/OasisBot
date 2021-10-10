@@ -1,6 +1,6 @@
-import ICommand from 'oasis/interfaces/ICommand';
-import Discord, { MessageAttachment } from 'discord.js';
-import { CheckGuildsPluginController } from '@repositories/guild/useCases/CheckGuildsPlugin/CheckGuildsPluginController';
+import { ICommand, Discord } from 'discord-oasis';
+
+import { CheckGuildsPluginController } from 'repositories/guild/useCases/CheckGuildsPlugin/CheckGuildsPluginController';
 
 const command: ICommand = {
   name: 'help',
@@ -13,13 +13,13 @@ const command: ICommand = {
   async execute(msg: Discord.Message): Promise<void> {
     const response: string = '';
 
-    msg.client.commandHandler.commands.forEach(async (command: ICommand) => {
-      if (!command.plugin) {
+    msg.client.command_handler.commands.forEach(async (command: ICommand) => {
+      if (!command.plugin_id) {
         // Send command
       } else {
         if (msg.guild) {
           const guild_id = msg.guild.id;
-          const havePlugin = await CheckGuildsPluginController.handle([guild_id], msg.command.plugin);
+          const havePlugin = await CheckGuildsPluginController.handle([guild_id], msg.command.plugin_id);
         }
       }
     });

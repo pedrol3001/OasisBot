@@ -1,6 +1,6 @@
-import { ICreatePluginDTO } from '@repositories/plugin/dtos/ICreatePluginDTO';
+import { ICreatePluginDTO } from 'repositories/plugin/dtos/ICreatePluginDTO';
 import { CreateGuildUseCase } from './CreatePluginUseCase';
-import { Plugin } from '@repositories/plugin/infra/typeorm/entities/Plugin';
+import { Plugin } from 'repositories/plugin/infra/typeorm/entities/Plugin';
 import { container } from 'tsyringe';
 
 const CreatePluginController = {

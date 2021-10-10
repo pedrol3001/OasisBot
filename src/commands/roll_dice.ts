@@ -1,5 +1,4 @@
-import ICommand from 'oasis/interfaces/ICommand';
-import Discord from 'discord.js';
+import { ICommand, Discord } from 'discord-oasis';
 
 const command: ICommand = {
   name: 'roll dice',

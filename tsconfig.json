@@ -5,16 +5,8 @@
     "rootDir": "./",
     "baseUrl": "./src",
     "paths": {
-      "@error/*": ["oasis/shared/error/*"],
-      "@config/*": ["oasis/config/*"],
-      "@interfaces/*": ["oasis/interfaces/*"],
-      "@plugin/*": ["oasis/shared/infra/discord/plugins/*"],
-      "@command/*": ["oasis/shared/infra/discord/command/*"],
-      "@database/*": ["oasis/shared/infra/database/*"],
-      "@discord/*": ["oasis/shared/infra/discord/*"],
-      "@repositories/*": ["oasis/repositories/*"],
-      "@guilds_repo/*": ["oasis/repositories/guild/*"],
-      "@plugins_repo/*": ["oasis/repositories/plugin/*"]
+      "@guild/*": ["repositories/guild/*"],
+      "@plugin/*": ["repositories/plugin/*"]
     },
     "outDir": "./dist",
     "esModuleInterop": true,

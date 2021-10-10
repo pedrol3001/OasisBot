@@ -1,5 +1,4 @@
-import ICommand from 'oasis/interfaces/ICommand';
-import Discord from 'discord.js';
+import { ICommand, Discord } from '@pedrol3001/discord-oasis';
 
 const command: ICommand = {
   name: 'pokemon',
@@ -9,7 +8,7 @@ const command: ICommand = {
   group: 'guildOnly',
 
   async execute(msg: Discord.Message): Promise<void> {
-    await msg.reply('Teste 123');
+    await msg.reply(`${msg.manager.getRandomPokemon()}`);
   },
 };
 

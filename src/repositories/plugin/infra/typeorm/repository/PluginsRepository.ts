@@ -1,4 +1,4 @@
-import { Guild } from '@repositories/guild/infra/typeorm/entities/Guild';
+import { Guild } from 'repositories/guild/infra/typeorm/entities/Guild';
 import { getRepository, Repository } from 'typeorm';
 import { ConditionalArray } from 'utils/types';
 import { ICreatePluginDTO } from '../../../dtos/ICreatePluginDTO';

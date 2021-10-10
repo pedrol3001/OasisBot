@@ -1,6 +1,6 @@
-import { Plugin } from '@repositories/plugin/infra/typeorm/entities/Plugin';
+import { Plugin } from 'repositories/plugin/infra/typeorm/entities/Plugin';
 import { inject, injectable } from 'tsyringe';
-import { IPluginsRepository } from '@repositories/plugin/infra/typeorm/repository/IPluginsRepository';
+import { IPluginsRepository } from 'repositories/plugin/infra/typeorm/repository/IPluginsRepository';
 
 @injectable()
 class GetByNameUseCase {

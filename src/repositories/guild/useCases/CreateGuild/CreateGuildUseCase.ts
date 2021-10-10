@@ -1,6 +1,6 @@
-import { IGuildsRepository } from '@repositories/guild/infra/typeorm/repository/IGuildsRepository';
+import { IGuildsRepository } from 'repositories/guild/infra/typeorm/repository/IGuildsRepository';
 import { inject, injectable } from 'tsyringe';
-import { ICreateGuildDTO } from '@repositories/guild/dtos/ICreateGuildDTO';
+import { ICreateGuildDTO } from 'repositories/guild/dtos/ICreateGuildDTO';
 
 @injectable()
 class CreateGuildUseCase {

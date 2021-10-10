@@ -1,4 +1,4 @@
-import { AbstractPlugin } from '@plugin/class/AbstractPlugin';
+import { AbstractPlugin } from '@pedrol3001/discord-oasis';
 import Pokedex from 'pokedex-promise-v2';
 import { IPokemonDTO } from './interfaces/IPokemonDTO';
 

@@ -1,8 +1,7 @@
-import ICommand from 'oasis/interfaces/ICommand';
-import Discord, { MessageAttachment } from 'discord.js';
-import { CreateGuildController } from '@repositories/guild/useCases/CreateGuild/CreateGuildController';
-import { ICreateGuildDTO } from '@repositories/guild/dtos/ICreateGuildDTO';
-import { LoadGuildsController } from '@repositories/guild/useCases/LoadGuilds/LoadGuildsController';
+import { ICommand, Discord } from 'discord-oasis';
+import { CreateGuildController } from 'repositories/guild/useCases/CreateGuild/CreateGuildController';
+import { ICreateGuildDTO } from 'repositories/guild/dtos/ICreateGuildDTO';
+import { LoadGuildsController } from 'repositories/guild/useCases/LoadGuilds/LoadGuildsController';
 
 const command: ICommand = {
   name: 'setup guilds',

@@ -1,6 +1,6 @@
-import { IPluginsRepository } from '@repositories/plugin/infra/typeorm/repository/IPluginsRepository';
-import { ICreatePluginDTO } from '@repositories/plugin/dtos/ICreatePluginDTO';
-import { Plugin } from '@repositories/plugin/infra/typeorm/entities/Plugin';
+import { IPluginsRepository } from 'repositories/plugin/infra/typeorm/repository/IPluginsRepository';
+import { ICreatePluginDTO } from 'repositories/plugin/dtos/ICreatePluginDTO';
+import { Plugin } from 'repositories/plugin/infra/typeorm/entities/Plugin';
 import { inject, injectable } from 'tsyringe';
 
 @injectable()

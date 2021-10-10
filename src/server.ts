@@ -1,11 +1,12 @@
 import 'reflect-metadata';
-import { root_dir } from '@config/enviroment';
+import { root_dir } from 'config/enviroment';
 
 import path from 'path';
 import WerewolfManager from './plugins/WerewolfManager';
 import PokemonManager from './plugins/PokemonManager';
 
-import { Oasis } from './oasis';
+import { Oasis } from 'discord-oasis';
+import { ConnectDb } from 'database/typeorm';
 
 const client = new Oasis({
   shard_count: parseInt(process.env.SHARD_COUNT || '1', 10),
@@ -16,4 +17,15 @@ const client = new Oasis({
   ],
 });
 
-client.listen(process.env.DISC_TOKEN);
+client.setGuildsLoader();
+
+client.setGuildsCreator();
+
+ConnectDb()
+  .then((connection) => {
+    console.log('Connected to database: ', connection.isConnected);
+    client.listen(process.env.DISC_TOKEN);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
