@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { IGuildsRepository } from 'repositories/guild/infra/typeorm/repository/IGuildsRepository';
+import { IGuildsRepository } from '@guild/prisma/IGuildsRepository';
 
 @injectable()
 class CheckGuildsPluginUseCase {

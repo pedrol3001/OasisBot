@@ -1,5 +1,5 @@
-import { ICreateGuildDTO } from 'repositories/guild/dtos/ICreateGuildDTO';
 import { container } from 'tsyringe';
+import { ICreateGuildDTO } from 'repositories/guild/dtos/ICreateGuildDTO';
 import { CreateGuildUseCase } from './CreateGuildUseCase';
 
 const CreateGuildController = {

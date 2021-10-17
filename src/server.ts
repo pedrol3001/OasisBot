@@ -6,7 +6,6 @@ import WerewolfManager from './plugins/WerewolfManager';
 import PokemonManager from './plugins/PokemonManager';
 
 import { Oasis } from 'discord-oasis';
-import { ConnectDb } from 'database/typeorm';
 
 const client = new Oasis({
   shard_count: parseInt(process.env.SHARD_COUNT || '1', 10),
@@ -21,11 +20,4 @@ client.setGuildsLoader();
 
 client.setGuildsCreator();
 
-ConnectDb()
-  .then((connection) => {
-    console.log('Connected to database: ', connection.isConnected);
-    client.listen(process.env.DISC_TOKEN);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+client.listen(process.env.DISC_TOKEN);

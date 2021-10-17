@@ -1,4 +1,4 @@
-import { IGuildsRepository } from 'repositories/guild/infra/typeorm/repository/IGuildsRepository';
+import { IGuildsRepository } from '@guild/prisma/IGuildsRepository';
 import { inject, injectable } from 'tsyringe';
 
 interface IPrefixChange {
@@ -18,7 +18,7 @@ class SetGuildPrefixUseCase {
 
     guild.prefix = prefix;
 
-    await this.guildRepository.create(guild);
+    await this.guildRepository.update(guild);
   }
 }
 
