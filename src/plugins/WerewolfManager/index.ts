@@ -1,4 +1,4 @@
-import { AbstractPlugin } from '@pedrol3001/discord-oasis';
+import { AbstractPlugin } from 'discord-oasis';
 
 class WerewolfManager extends AbstractPlugin {
   constructor(commands_folder: string) {

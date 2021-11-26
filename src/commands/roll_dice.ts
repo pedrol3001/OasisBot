@@ -1,4 +1,4 @@
-import { ICommand, Discord } from 'discord-oasis';
+import { ICommand, Message } from 'discord-oasis';
 
 const command: ICommand = {
   name: 'roll dice',
@@ -8,7 +8,7 @@ const command: ICommand = {
   description: 'Roll a dice of n faces',
   group: 'global',
 
-  async execute(msg: Discord.Message): Promise<void> {
+  async execute(msg: Message): Promise<void> {
     msg.args.forEach(async (arg) => {
       await msg.reply(`Rolled ${Math.floor(Math.random() * Number(arg))}`);
     });

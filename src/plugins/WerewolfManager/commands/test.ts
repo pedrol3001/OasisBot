@@ -1,5 +1,5 @@
 import Discord from 'discord.js';
-import { ICommand } from '@pedrol3001/discord-oasis';
+import { ICommand } from 'discord-oasis';
 
 const command: ICommand = {
   name: 'test wf',
