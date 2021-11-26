@@ -10,7 +10,7 @@ const command: ICommand = {
   group: 'global',
 
   async execute(msg: Discord.Message): Promise<void> {
-    await msg.reply('Teste 123');
+    await msg.reply('Teste Werewolf');
   },
 };
 
