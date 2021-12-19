@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { root_dir } from 'config/enviroment';
+import { root_dir } from './config/environment';
 
 import path from 'path';
 import WerewolfManager from './plugins/WerewolfManager';
@@ -17,4 +17,4 @@ const client = new Oasis({
   ],
 });
 
-client.listen(process.env.DISC_TOKEN);
+client.listen(process.env.DISC_TOKEN || 'Missing Token');

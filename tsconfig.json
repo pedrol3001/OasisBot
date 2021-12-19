@@ -4,10 +4,7 @@
     "module": "commonjs",
     "rootDir": "./",
     "baseUrl": "./src",
-    "paths": {
-      "@guild/*": ["repositories/guild/*"],
-      "@plugin/*": ["repositories/plugin/*"]
-    },
+    "paths": {},
     "outDir": "./dist",
     "esModuleInterop": true,
     "experimentalDecorators": true,

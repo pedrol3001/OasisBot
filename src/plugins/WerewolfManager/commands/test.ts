@@ -11,9 +11,10 @@ const command: ICommand = {
   group: 'global',
 
   async execute(msg: Discord.Message): Promise<void> {
-    const text = msg.command.plugin_id;
+    const plugin_id = msg.command?.plugin_id;
+    if (!plugin_id) return;
     const manager = msg.manager as WerewolfManager;
-    await msg.reply(`Teste Werewolf: ${manager.convertText(text)}`);
+    await msg.reply(`Test Werewolf: ${manager.convertText(plugin_id)}`);
   },
 };
 
