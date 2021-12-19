@@ -5,9 +5,10 @@ import path from 'path';
 import WerewolfManager from './plugins/WerewolfManager';
 //import PokemonManager from './plugins/PokemonManager';
 
-import { Oasis } from 'discord-oasis';
+import { Intents, Oasis } from 'discord-oasis';
 
 const client = new Oasis({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_TYPING],
   global_prefix: '!',
   commands_folder: `${path.resolve(root_dir, 'commands')}`,
   plugins: [
