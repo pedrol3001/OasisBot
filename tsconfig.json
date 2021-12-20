@@ -16,6 +16,7 @@
     "stripInternal": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "baseUrl": "./src/",
 
     "module": "commonjs",
     "target": "es2021",
