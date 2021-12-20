@@ -9,7 +9,8 @@
     "node": "17.x"
   },
   "scripts": {
-    "start": "node --experimental-modules ./dist/server.js",
+    "start": "node ./dist/server.js",
+    "db:migrate": "prisma migrate dev",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "build": "prisma generate && babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "test": "jest"
