@@ -9,8 +9,8 @@ import { Intents, Oasis } from 'discord-oasis';
 
 const client = new Oasis({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_TYPING],
-  global_prefix: process.env.PREFIX || '!',
-  commands_folder: `${path.resolve(root_dir, 'commands')}`,
+  globalPrefix: process.env.PREFIX || '!',
+  commandsFolder: `${path.resolve(root_dir, 'commands')}`,
   plugins: [
     new WerewolfManager(path.resolve(root_dir, 'plugins', 'WerewolfManager', 'commands')),
     //new PokemonManager(path.resolve(root_dir, 'plugins', 'PokemonManager', 'commands')),
