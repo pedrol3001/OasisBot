@@ -2,7 +2,7 @@ import { ICommand, Message } from 'discord-oasis';
 
 const command: ICommand = {
   name: 'roll dice',
-  aliases: ['roll'],
+  aliases: ['rd'],
   options: [{ type: 'INTEGER', name: 'sides', description: 'The number of sides on the dice' }],
   description: 'Roll a dice of n faces',
   group: 'global',
