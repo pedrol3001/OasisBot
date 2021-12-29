@@ -5,7 +5,7 @@ import TestManager from '..';
 const command: ICommand = {
   name: 'test mn b',
   aliases: ['tmnb'],
-  options: [{ type: 'INTEGER', name: 'sides', description: 'The number of sides on the dice' }],
+  options: [{ type: 'STRING', name: 'sides', description: 'The number of sides on the dice', required: true }],
   description: 'Test mn b',
   group: 'global',
 

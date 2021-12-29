@@ -5,7 +5,7 @@ import WerewolfManager from '..';
 const command: ICommand = {
   name: 'test tf a',
   aliases: ['ttfa'],
-  options: [{ type: 'INTEGER', name: 'sides', description: 'The number of sides on the dice' }],
+  options: [{ type: 'STRING', name: 'sides', description: 'The number of sides on the dice' }],
   description: 'Test tf a',
   group: 'global',
 

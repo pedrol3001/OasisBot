@@ -21,8 +21,8 @@ const client = new Oasis({
   globalPrefix: process.env.PREFIX || '!',
   commandsFolder: `${path.resolve(root_dir, 'commands')}`,
   plugins: [
-    new WerewolfManager(path.resolve(root_dir, 'plugins', 'WerewolfManager', 'commands')),
-    new TestManager(path.resolve(root_dir, 'plugins', 'TestManager', 'commands')),
+    //new WerewolfManager(path.resolve(root_dir, 'plugins', 'WerewolfManager', 'commands')),
+    //new TestManager(path.resolve(root_dir, 'plugins', 'TestManager', 'commands')),
   ],
 });
 
