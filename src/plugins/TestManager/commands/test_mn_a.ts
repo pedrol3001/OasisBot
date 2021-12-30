@@ -6,7 +6,11 @@ const command: ICommand = {
   name: 'test mn a',
   aliases: ['tmna'],
   options: [{ type: 'STRING', name: 'sides', description: 'The number of sides on the dice' }],
-  description: 'Test mn a',
+  description: {
+    command: 'Test',
+    subCommand: 'Test mn',
+    subCommandGroup: 'Test mn a',
+  },
   group: 'global',
 
   async execute(msg: Discord.Message): Promise<void> {

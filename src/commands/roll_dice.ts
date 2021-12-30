@@ -3,8 +3,11 @@ import { ICommand, Message } from 'discord-oasis';
 const command: ICommand = {
   name: 'roll dice',
   aliases: ['rd'],
-  options: [{ type: 'INTEGER', name: 'sides', description: 'The number of sides on the dice' }],
-  description: 'Roll a dice of n faces',
+  options: [{ type: 'INTEGER', name: 'sides', description: 'The number of sides on the dice', required: true }],
+  description: {
+    command: 'Roll something',
+    subCommand: 'Roll a dice',
+  },
   group: 'global',
 
   async execute(msg: Message): Promise<void> {
